@@ -1,0 +1,9 @@
+---
+import { Copyright } from "./Copyright";
+// TODO: this will only run at build, not on the client
+const year = new Date().getFullYear();
+---
+
+<footer class="p-8">
+  <p><Copyright client:load /> Agathist</p>
+</footer>

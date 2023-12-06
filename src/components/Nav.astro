@@ -1,0 +1,40 @@
+---
+// Yes, this is overkill for now, but eventually we will have additional links
+const links = [
+  {
+    href: "/services",
+    text: "Services",
+  },
+  {
+    href: "/about",
+    text: "About",
+  },
+];
+
+// Used for currentPage styles
+const { pathname } = new URL(Astro.request.url);
+---
+
+<nav>
+  <ul class="flex items-baseline gap-4">
+    {
+      links.map((link) => {
+        const isCurrentPage = pathname === link.href;
+
+        return (
+          <li>
+            <a
+              aria-label={link.text}
+              class={`border-y-4 border-transparent p-2 text-sm uppercase tracking-widest ${
+                isCurrentPage && "border-b-pink-500"
+              }`}
+              href={link.href}
+            >
+              {link.text}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

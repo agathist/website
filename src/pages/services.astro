@@ -1,0 +1,39 @@
+---
+import Container from "../components/Container.astro";
+import PageHeading from "../components/PageHeading.astro";
+import Todo from "../components/Todo.astro";
+import Layout from "../layouts/Layout.astro";
+
+const techs = [
+  "TypeScript",
+  "JavaScript",
+  "React",
+  "NextJS",
+  "Astro",
+  "Tailwind",
+  "And more",
+];
+---
+
+<Layout title="Services | Agathist">
+  <main>
+    <Container>
+      <div class="flex flex-col gap-8">
+        <PageHeading>Services</PageHeading>
+
+        <div class="flex max-w-prose flex-col gap-8 text-xl">
+          <p>
+            Our software engineers have decades of experience and are experts in
+            some of the most popular web technologies in use, such as:
+          </p>
+
+          <Todo>TODO: USE LOGOS TOO. PEOPLE SEEM TO LOVE LOGOS</Todo>
+
+          <ul class="list-inside list-disc">
+            {techs.map((tech) => <li>{tech}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </main>
+</Layout>

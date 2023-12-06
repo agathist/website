@@ -1,0 +1,103 @@
+---
+import Banner from "../components/Banner.astro";
+import ContactUsForm from "../components/ContactUsForm.astro";
+import Container from "../components/Container.astro";
+import Elaboration from "../components/Elaboration.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Home | Agathist">
+  <main>
+    <div class="pb-32 pt-24">
+      <Banner />
+    </div>
+
+    <section>
+      <div
+        class="gradient-animation basis-1/2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 px-8"
+      >
+        <Container>
+          <div class="lg:flex lg:gap-8">
+            <div
+              class="grow basis-1/2 py-16 text-center text-3xl font-light leading-tight lg:py-32 lg:text-left lg:text-4xl lg:drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]"
+            >
+              <div class="flex flex-col gap-8 lg:gap-4">
+                <p>We are ready to build your next great&nbsp;application</p>
+                <p>Or improve one of your existing&nbsp;ones</p>
+              </div>
+            </div>
+
+            <div class="relative hidden basis-1/2 lg:block">
+              <div
+                class="absolute -bottom-1/4 -top-1/4 flex w-full items-center bg-slate-800 p-8 shadow-lg"
+              >
+                <div class="text-xl">
+                  <Elaboration />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      <div class="lg:hidden">
+        <Container>
+          <div class="py-16 text-xl">
+            <Elaboration />
+          </div>
+        </Container>
+      </div>
+    </section>
+
+    <section class="py-24">
+      <Container>
+        <div class="text-xl">
+          <div>TODO: Maybe a teaser about the About page here</div>
+          <div>
+            Our software engineers have decades of experience and are experts
+            in:
+
+            <ul class="list-inside list-disc">
+              <li>TypeScript & JavaScript</li>
+              <li>React</li>
+              <li>NextJS</li>
+              <li>Tailwind</li>
+            </ul>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-gradient-to-b from-pink-900 to-slate-900 py-24">
+      <Container>
+        <div class="flex flex-col gap-8 md:flex-row">
+          <div class="flex flex-col gap-2 md:basis-1/2">
+            <div class="text-4xl md:text-6xl">Contact Us</div>
+            <div class="text-xl md:text-2xl">Let's chat.</div>
+          </div>
+
+          <div class="md:basis-1/2">
+            <ContactUsForm />
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .gradient-animation {
+    background-size: 300%;
+    animation: move-gradient 10s ease infinite;
+  }
+
+  @keyframes move-gradient {
+    0%,
+    100% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+import ContactUsForm from "../components/ContactUsForm.astro";
+import Container from "../components/Container.astro";
+import PageHeading from "../components/PageHeading.astro";
+import Todo from "../components/Todo.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact Us | Agathist">
+  <main>
+    <Container>
+      <div class="flex flex-col gap-8">
+        <PageHeading>Contact Us</PageHeading>
+
+        <Todo>TODO: Make form + contact info</Todo>
+
+        <div class="max-w-prose">
+          <ContactUsForm />
+        </div>
+      </div>
+    </Container>
+  </main>
+</Layout>

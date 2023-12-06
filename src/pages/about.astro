@@ -1,0 +1,50 @@
+---
+import Container from "../components/Container.astro";
+import PageHeading from "../components/PageHeading.astro";
+import Todo from "../components/Todo.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="About | Agathist">
+  <main>
+    <Container>
+      <div class="flex flex-col gap-8">
+        <PageHeading>About</PageHeading>
+
+        <Todo>TODO: Write about us here</Todo>
+
+        <section
+          class="max-w-prose text-xl font-light leading-normal md:text-3xl"
+        >
+          <div class="flex flex-col gap-8">
+            <p>
+              <strong>Agathist</strong> (n.) from the Greek <em>agathos</em>,
+              meaning "good".
+            </p>
+
+            <p>
+              An <em>agathist</em> believes that all things trend towards "the
+              good".
+            </p>
+
+            <p>
+              However, don't mistake one for an optimist. This isn't silver
+              linings or saying things aren't as bad as they seem. This is about
+              acknowledging reality and doing the work to make it better, one
+              action at a time.
+            </p>
+            <p>That's what we do for software, too.</p>
+          </div>
+        </section>
+      </div>
+    </Container>
+
+    <section>
+      <Container>
+        <div class="py-8">
+          <Todo>TODO: Write about me, the founder here</Todo>
+        </div>
+      </Container>
+    </section>
+  </main>
+</Layout>
