@@ -18,3 +18,7 @@ npm install
 ```
 npm run start
 ```
+
+## Deploy
+
+TODO: Site is not ready for prod, so this hasn't been figured out yet.
