@@ -3,7 +3,16 @@ import Banner from "../components/Banner.astro";
 import ContactUsForm from "../components/ContactUsForm.astro";
 import Container from "../components/Container.astro";
 import Elaboration from "../components/Elaboration.astro";
+import Todo from "../components/Todo.astro";
 import Layout from "../layouts/Layout.astro";
+
+const techs = [
+  { name: "TypeScript", logo: "" },
+  { name: "JavaScript", logo: "" },
+  { name: "React", logo: "" },
+  { name: "NextJS", logo: "" },
+  { name: "TailwindCSS", logo: "" },
+];
 ---
 
 <Layout title="Home | Agathist">
@@ -27,9 +36,13 @@ import Layout from "../layouts/Layout.astro";
               </div>
             </div>
 
+            <!--
+              This is the simplest way I could find to achieve the responsive
+              layout for Elaboration I wanted
+            -->
             <div class="relative hidden basis-1/2 lg:block">
               <div
-                class="absolute -bottom-1/4 -top-1/4 flex w-full items-center bg-slate-800 p-8 shadow-lg"
+                class="absolute -bottom-1/4 -top-1/4 flex w-full items-center rounded bg-slate-800 p-8 shadow-lg"
               >
                 <div class="text-xl">
                   <Elaboration />
@@ -40,7 +53,7 @@ import Layout from "../layouts/Layout.astro";
         </Container>
       </div>
 
-      <div class="lg:hidden">
+      <div class="bg-gradient-to-b from-slate-800 to-slate-900 lg:hidden">
         <Container>
           <div class="py-16 text-xl">
             <Elaboration />
@@ -49,20 +62,48 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </section>
 
-    <section class="py-24">
+    <section class="py-32">
       <Container>
-        <div class="text-xl">
-          <div>TODO: Maybe a teaser about the About page here</div>
-          <div>
+        <div class="text-2xl">
+          <Todo>TODO: Maybe a teaser about the About page here</Todo>
+
+          <div class="py-8">
             Our software engineers have decades of experience and are experts
             in:
+          </div>
 
-            <ul class="list-inside list-disc">
-              <li>TypeScript & JavaScript</li>
-              <li>React</li>
-              <li>NextJS</li>
-              <li>Tailwind</li>
-            </ul>
+          <ul class="flex flex-wrap justify-evenly gap-8">
+            {
+              techs.map((tech) => (
+                <li>
+                  <div class="flex flex-col items-center gap-4 rounded-lg border border-gray-100/25 p-8 lg:p-12">
+                    <div class="h-24 w-24 lg:h-32 lg:w-32">
+                      <Todo>
+                        <img src={tech.logo} alt={`${tech.name} logo`} />
+                      </Todo>
+                    </div>
+
+                    <div class="font-bold tracking-wide">{tech.name}</div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-gradient-to-b from-slate-900 to-pink-900">
+      <Container>
+        <div class="flex flex-col gap-8 py-32">
+          <Todo>
+            TODO: Most agencies have a thing about the companies they work with
+          </Todo>
+
+          <div class="flex flex-col gap-8 text-center text-4xl">
+            <h3>Companies we've worked with</h3>
+            <div>No one. Wanna be the first? Gotta start somewhere</div>
+            <div>Your logo could be here</div>
           </div>
         </div>
       </Container>
@@ -70,13 +111,13 @@ import Layout from "../layouts/Layout.astro";
 
     <section class="bg-gradient-to-b from-pink-900 to-slate-900 py-24">
       <Container>
-        <div class="flex flex-col gap-8 md:flex-row">
-          <div class="flex flex-col gap-2 md:basis-1/2">
-            <div class="text-4xl md:text-6xl">Contact Us</div>
+        <div class="flex flex-col gap-8 lg:items-center">
+          <div class="lg:text-center">
+            <div class="text-3xl md:text-5xl">Contact Us</div>
             <div class="text-xl md:text-2xl">Let's chat.</div>
           </div>
 
-          <div class="md:basis-1/2">
+          <div class="w-full lg:w-1/2">
             <ContactUsForm />
           </div>
         </div>
