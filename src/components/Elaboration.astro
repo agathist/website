@@ -1,5 +1,28 @@
 ---
 import Todo from "./Todo.astro";
+
+const disciplines = [
+  "Web & Mobile Development",
+  "Design Systems",
+  "Codebase Improvement",
+  "Workshops",
+];
 ---
 
-<Todo>TODO: Elaborate a bit here</Todo>
+<div class="flex flex-col gap-8">
+  <div class="font-serif text-3xl">Let us help you with</div>
+
+  <ul class="grid grid-cols-2 gap-6 text-2xl font-light">
+    {
+      disciplines.map((item) => (
+        <li>
+          <div class="flex h-full flex-col justify-end">
+            <div class="p-2">{item}</div>
+            <div class="h-1 bg-gradient-to-br from-pink-500 to-rose-500" />
+          </div>
+        </li>
+      ))
+    }
+    <li class="flex flex-col justify-end p-4">...and more</li>
+  </ul>
+</div>

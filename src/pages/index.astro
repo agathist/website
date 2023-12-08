@@ -5,17 +5,24 @@ import Container from "../components/Container.astro";
 import Elaboration from "../components/Elaboration.astro";
 import Todo from "../components/Todo.astro";
 import Layout from "../layouts/Layout.astro";
+import JavaScript from "../components/icons/JavaScript.astro";
+import NextJs from "../components/icons/NextJs.astro";
+import React from "../components/icons/React.astro";
+import Tailwind from "../components/icons/Tailwind.astro";
+import TypeScript from "../components/icons/TypeScript.astro";
 
 const techs = [
-  { name: "TypeScript", logo: "" },
-  { name: "JavaScript", logo: "" },
-  { name: "React", logo: "" },
-  { name: "NextJS", logo: "" },
-  { name: "TailwindCSS", logo: "" },
+  { name: "TypeScript", Logo: TypeScript },
+  { name: "JavaScript", Logo: JavaScript },
+  { name: "React", Logo: React },
+  { name: "NextJS", Logo: NextJs },
+  { name: "TailwindCSS", Logo: Tailwind },
 ];
 ---
 
-<Layout title="Home | Agathist">
+<Layout
+  title="Agathist | Software Development for Web and Mobile | React, TypeScript"
+>
   <main>
     <div class="pb-32 pt-24">
       <Banner />
@@ -42,9 +49,9 @@ const techs = [
             -->
             <div class="relative hidden basis-1/2 lg:block">
               <div
-                class="absolute -bottom-1/4 -top-1/4 flex w-full items-center rounded bg-slate-800 p-8 shadow-lg"
+                class="absolute -bottom-1/4 -top-1/4 w-full rounded bg-slate-800 p-8 shadow-lg"
               >
-                <div class="text-xl">
+                <div class="flex h-full flex-col justify-center">
                   <Elaboration />
                 </div>
               </div>
@@ -62,28 +69,27 @@ const techs = [
       </div>
     </section>
 
-    <section class="py-32">
+    <section class="py-32 pt-48">
       <Container>
-        <div class="text-2xl">
-          <Todo>TODO: Maybe a teaser about the About page here</Todo>
-
-          <div class="py-8">
-            Our software engineers have decades of experience and are experts
-            in:
+        <div>
+          <h3 class="font-serif text-5xl">
+            Valuable Experience &amp; Expertise
+          </h3>
+          <div class="max-w-prose py-8 text-2xl">
+            Our software engineers have decades of experience and are experts in
+            some of today's most widely used technologies
           </div>
 
-          <ul class="flex flex-wrap justify-evenly gap-8">
+          <ul class="flex flex-wrap items-end justify-evenly gap-8">
             {
-              techs.map((tech) => (
+              techs.map(({ name, Logo }) => (
                 <li>
-                  <div class="flex flex-col items-center gap-4 rounded-lg border border-gray-100/25 p-8 lg:p-12">
-                    <div class="h-24 w-24 lg:h-32 lg:w-32">
-                      <Todo>
-                        <img src={tech.logo} alt={`${tech.name} logo`} />
-                      </Todo>
+                  <div class="flex flex-col items-center gap-4 p-4">
+                    <div class="w-24 text-slate-200 lg:w-32">
+                      <Logo />
                     </div>
 
-                    <div class="font-bold tracking-wide">{tech.name}</div>
+                    <div class="text-2xl font-bold tracking-wide">{name}</div>
                   </div>
                 </li>
               ))
@@ -96,14 +102,16 @@ const techs = [
     <section class="bg-gradient-to-b from-slate-900 to-pink-900">
       <Container>
         <div class="flex flex-col gap-8 py-32">
-          <Todo>
-            TODO: Most agencies have a thing about the companies they work with
-          </Todo>
+          <div class="flex flex-col gap-8">
+            <h3 class="font-serif text-5xl">Our Clients</h3>
 
-          <div class="flex flex-col gap-8 text-center text-4xl">
-            <h3>Companies we've worked with</h3>
-            <div>No one. Wanna be the first? Gotta start somewhere</div>
-            <div>Your logo could be here</div>
+            <div class="text-2xl">
+              <div>No one. Wanna be the first? Gotta start somewhere.</div>
+              <div>Your logo could be here</div>
+              <div class="my-4 flex">
+                <Todo>TODO: This could be fancier</Todo>
+              </div>
+            </div>
           </div>
         </div>
       </Container>
@@ -113,7 +121,7 @@ const techs = [
       <Container>
         <div class="flex flex-col gap-8 lg:items-center">
           <div class="lg:text-center">
-            <div class="text-3xl md:text-5xl">Contact Us</div>
+            <div class="font-serif text-3xl md:text-5xl">Contact Us</div>
             <div class="text-xl md:text-2xl">Let's chat.</div>
           </div>
 
