@@ -1,6 +1,7 @@
 ---
 title: "Codebase Improvement"
 order: 2
+published: true
 ---
 
 Know your codebase is a mess and need help making it better? We can do that.

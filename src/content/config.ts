@@ -6,6 +6,7 @@ const servicesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     order: z.number(),
+    published: z.boolean(),
   }),
 });
 

@@ -6,7 +6,11 @@ import TechExpertise from "../components/TechExpertise.astro";
 import Layout from "../layouts/Layout.astro";
 import PageStandard from "../layouts/PageStandard.astro";
 
-const servicesEntries = await getCollection("services");
+const servicesEntries = await getCollection(
+  "services",
+  (entry) => entry.data.published,
+);
+
 const services = await Promise.all(
   servicesEntries.map(async (entry) => {
     const { data } = entry;
@@ -15,6 +19,7 @@ const services = await Promise.all(
     return { Content, data };
   }),
 );
+
 const sortedServices = services.toSorted((a, b) => a.data.order - b.data.order);
 ---
 
@@ -59,13 +64,15 @@ const sortedServices = services.toSorted((a, b) => a.data.order - b.data.order);
       <Container>
         <h2 class="my-24 font-serif text-5xl">What We're Good At</h2>
 
-        <div class="flex flex-col items-start gap-16">
+        <div class="flex flex-col gap-16">
           {
-            sortedServices.map(({ Content, data }, idx) => (
-              <div class={`flex flex-col gap-8 rounded bg-slate-900/50 p-12 `}>
-                <h2 class="text-4xl font-bold text-pink-500">{data.title}</h2>
-                <div class="flex max-w-prose flex-col gap-6 text-2xl font-light leading-relaxed">
-                  <Content />
+            sortedServices.map(({ Content, data }) => (
+              <div class="max-w-prose text-2xl">
+                <div class="flex flex-col gap-8 rounded bg-slate-900/50 p-12">
+                  <h2 class="text-4xl font-bold text-pink-500">{data.title}</h2>
+                  <div class="flex flex-col gap-6 text-2xl font-light leading-relaxed">
+                    <Content />
+                  </div>
                 </div>
               </div>
             ))
