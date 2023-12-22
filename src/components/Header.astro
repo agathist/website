@@ -3,7 +3,7 @@ import Nav from "./Nav.astro";
 ---
 
 <header class="sticky top-0 z-10 bg-slate-900 px-8 py-4 shadow">
-  <div class="flex items-baseline justify-between gap-4">
+  <div class="flex items-center justify-between gap-4">
     <a
       class="text-xl font-bold text-pink-500 transition-all hover:text-orange-400 md:text-2xl"
       href="/"
@@ -11,32 +11,6 @@ import Nav from "./Nav.astro";
       Agathist
     </a>
 
-    <div class="flex items-baseline gap-4 md:gap-8">
-      <Nav />
-
-      <a
-        class="gradient-animation rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 px-6 py-2 text-sm uppercase tracking-widest text-white"
-        href="/contact"
-      >
-        Contact&nbsp;Us
-      </a>
-    </div>
+    <Nav />
   </div>
 </header>
-
-<style>
-  .gradient-animation {
-    background-size: 300%;
-    animation: move-gradient 6s ease infinite;
-  }
-
-  @keyframes move-gradient {
-    0%,
-    100% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 0%;
-    }
-  }
-</style>

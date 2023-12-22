@@ -1,30 +1,17 @@
 ---
 import Banner from "../components/Banner.astro";
-import ContactUsForm from "../components/ContactUsForm.astro";
+import { ContactUsForm } from "../components/ContactUsForm.tsx";
 import Container from "../components/Container.astro";
 import Elaboration from "../components/Elaboration.astro";
-import Todo from "../components/Todo.astro";
+import TechExpertise from "../components/TechExpertise.astro";
 import Layout from "../layouts/Layout.astro";
-import JavaScript from "../components/icons/JavaScript.astro";
-import NextJs from "../components/icons/NextJs.astro";
-import React from "../components/icons/React.astro";
-import Tailwind from "../components/icons/Tailwind.astro";
-import TypeScript from "../components/icons/TypeScript.astro";
-
-const techs = [
-  { name: "TypeScript", Logo: TypeScript },
-  { name: "JavaScript", Logo: JavaScript },
-  { name: "React", Logo: React },
-  { name: "NextJS", Logo: NextJs },
-  { name: "TailwindCSS", Logo: Tailwind },
-];
 ---
 
 <Layout
   title="Agathist | Software Development for Web and Mobile | React, TypeScript"
 >
   <main>
-    <div class="pb-32 pt-24">
+    <div class="pb-24 pt-16 lg:pb-32 lg:pt-24">
       <Banner />
     </div>
 
@@ -46,6 +33,8 @@ const techs = [
             <!--
               This is the simplest way I could find to achieve the responsive
               layout for Elaboration I wanted
+
+              Render it twice, hide it when necessary
             -->
             <div class="relative hidden basis-1/2 lg:block">
               <div
@@ -69,69 +58,73 @@ const techs = [
       </div>
     </section>
 
-    <section class="py-32 pt-48">
+    <section class="pt-16 lg:py-32 lg:pt-60">
       <Container>
         <div>
-          <h3 class="font-serif text-5xl">
+          <h3 class="font-serif text-3xl lg:text-5xl">
             Valuable Experience &amp; Expertise
           </h3>
-          <div class="max-w-prose py-8 text-2xl">
-            Our software engineers have decades of experience and are experts in
-            some of today's most widely used technologies
+
+          <div class="max-w-prose py-8 text-xl font-light lg:text-2xl">
+            <p class="leading-relaxed">
+              Our software engineers have decades of experience and are experts
+              in some of today's most widely used technologies
+            </p>
           </div>
 
-          <ul class="flex flex-wrap items-end justify-evenly gap-8">
-            {
-              techs.map(({ name, Logo }) => (
-                <li>
-                  <div class="flex flex-col items-center gap-4 p-4">
-                    <div class="w-24 text-slate-200 lg:w-32">
-                      <Logo />
-                    </div>
-
-                    <div class="text-2xl font-bold tracking-wide">{name}</div>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </Container>
-    </section>
-
-    <section class="bg-gradient-to-b from-slate-900 to-pink-900">
-      <Container>
-        <div class="flex flex-col gap-8 py-32">
-          <div class="flex flex-col gap-8">
-            <h3 class="font-serif text-5xl">Our Clients</h3>
-
-            <div class="text-2xl">
-              <div>No one. Wanna be the first? Gotta start somewhere.</div>
-              <div>Your logo could be here</div>
-              <div class="my-4 flex">
-                <Todo>TODO: This should be better</Todo>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-
-    <section class="bg-gradient-to-b from-pink-900 to-slate-900 py-24">
-      <Container>
-        <div class="flex flex-col gap-8 lg:items-center">
-          <div class="lg:text-center">
-            <div class="font-serif text-3xl md:text-5xl">Contact Us</div>
-            <div class="text-xl md:text-2xl">Let's chat.</div>
-          </div>
-
-          <div class="w-full lg:w-1/2">
-            <ContactUsForm />
+          <div class="lg:mt-12">
+            <TechExpertise />
           </div>
         </div>
       </Container>
     </section>
   </main>
+
+  <section class="bg-gradient-to-b from-slate-900 to-pink-900">
+    <Container>
+      <div class="flex flex-col gap-16 py-32">
+        <h3 class="text-center font-serif text-3xl lg:text-5xl">Our Clients</h3>
+
+        <div class="flex flex-col gap-8 text-center">
+          <div class="flex flex-col gap-4 text-xl font-light lg:text-2xl">
+            <p class="leading-relaxed">
+              No one yet, but you have to start somewhere! Want to be
+              the&nbsp;first?
+            </p>
+
+            <p class="leading-relaxed">
+              Your logo and testimonial could one day be&nbsp;here.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-8">
+          {
+            ["Your", "Logo", "Here"].map((text) => (
+              <div class="flex h-32 w-32 items-center justify-center rounded-xl border-4 border-dashed border-gray-300/90 text-3xl text-gray-300/90">
+                {text}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-gradient-to-b from-pink-900 to-slate-900 lg:py-24">
+    <Container>
+      <div class="flex flex-col gap-8 lg:items-center">
+        <div class="flex flex-col gap-4 lg:text-center">
+          <div class="font-serif text-3xl lg:text-5xl">Contact Us</div>
+          <div class="text-xl md:text-2xl">Let's chat.</div>
+        </div>
+
+        <div class="w-full lg:w-1/2">
+          <ContactUsForm client:visible />
+        </div>
+      </div>
+    </Container>
+  </section>
 </Layout>
 
 <style>

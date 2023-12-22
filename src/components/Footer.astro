@@ -1,9 +1,25 @@
 ---
 import { Copyright } from "./Copyright";
-// TODO: this will only run at build, not on the client
-const year = new Date().getFullYear();
+
+const links = [
+  { href: "/services", text: "Services" },
+  { href: "/about", text: "About" },
+  { href: "/contact", text: "Contact Us" },
+];
 ---
 
-<footer class="p-8">
+<footer class="flex items-end justify-between p-8 pt-32">
   <p><Copyright client:load /> Agathist</p>
+
+  <nav>
+    <ul class="flex gap-6">
+      {
+        links.map((link) => (
+          <a class="text-gray-300 hover:text-white" href={link.href}>
+            {link.text}
+          </a>
+        ))
+      }
+    </ul>
+  </nav>
 </footer>

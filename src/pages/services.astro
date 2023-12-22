@@ -1,39 +1,77 @@
 ---
+import { getCollection } from "astro:content";
 import Container from "../components/Container.astro";
 import PageHeading from "../components/PageHeading.astro";
-import Todo from "../components/Todo.astro";
+import TechExpertise from "../components/TechExpertise.astro";
 import Layout from "../layouts/Layout.astro";
+import PageStandard from "../layouts/PageStandard.astro";
 
-const techs = [
-  "TypeScript",
-  "JavaScript",
-  "React",
-  "NextJS",
-  "Astro",
-  "Tailwind",
-  "And more",
-];
+const servicesEntries = await getCollection("services");
+const services = await Promise.all(
+  servicesEntries.map(async (entry) => {
+    const { data } = entry;
+    const { Content } = await entry.render();
+
+    return { Content, data };
+  }),
+);
+const sortedServices = services.toSorted((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout title="Services | Agathist">
-  <main>
+  <PageStandard>
     <Container>
-      <div class="flex flex-col gap-8">
-        <PageHeading>Services</PageHeading>
+      <div>
+        <div class="mb-8">
+          <PageHeading>Services</PageHeading>
+        </div>
 
-        <div class="flex max-w-prose flex-col gap-8 text-xl">
+        <div
+          class="w-[50ch] font-serif text-2xl font-light leading-relaxed lg:text-3xl lg:leading-relaxed"
+        >
           <p>
             Our software engineers have decades of experience and are experts in
             some of the most popular web technologies in use, such as:
           </p>
-
-          <Todo>TODO: USE LOGOS TOO. PEOPLE SEEM TO LOVE LOGOS</Todo>
-
-          <ul class="list-inside list-disc">
-            {techs.map((tech) => <li>{tech}</li>)}
-          </ul>
         </div>
       </div>
+
+      <div class="py-24">
+        <TechExpertise />
+      </div>
+
+      <div
+        class="flex max-w-prose flex-col gap-8 text-2xl font-light leading-relaxed"
+      >
+        <p>
+          Don't see your technology? Don't worry. Part of becoming experts is
+          having the skill to continuously learn new things and actively
+          experiment with new technologies. Chances are we could learn what you
+          need us to. Don't let a missing logo stop you from asking if we can
+          help you.
+        </p>
+      </div>
     </Container>
-  </main>
+
+    <section
+      class="bg-gradient-to-b from-slate-900 via-pink-900 to-slate-900 py-24 pb-48"
+    >
+      <Container>
+        <h2 class="my-24 font-serif text-5xl">What We're Good At</h2>
+
+        <div class="flex flex-col items-start gap-16">
+          {
+            sortedServices.map(({ Content, data }, idx) => (
+              <div class={`flex flex-col gap-8 rounded bg-slate-900/50 p-12 `}>
+                <h2 class="text-4xl font-bold text-pink-500">{data.title}</h2>
+                <div class="flex max-w-prose flex-col gap-6 text-2xl font-light leading-relaxed">
+                  <Content />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </Container>
+    </section>
+  </PageStandard>
 </Layout>

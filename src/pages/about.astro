@@ -3,10 +3,11 @@ import Container from "../components/Container.astro";
 import PageHeading from "../components/PageHeading.astro";
 import Todo from "../components/Todo.astro";
 import Layout from "../layouts/Layout.astro";
+import PageStandard from "../layouts/PageStandard.astro";
 ---
 
 <Layout title="About | Agathist">
-  <main>
+  <PageStandard>
     <Container>
       <div class="flex flex-col gap-8">
         <PageHeading>About</PageHeading>
@@ -46,5 +47,5 @@ import Layout from "../layouts/Layout.astro";
         </div>
       </Container>
     </section>
-  </main>
+  </PageStandard>
 </Layout>

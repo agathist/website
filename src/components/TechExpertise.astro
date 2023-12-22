@@ -1,0 +1,32 @@
+---
+import NextJs from "../components/icons/NextJs.astro";
+import React from "../components/icons/React.astro";
+import Tailwind from "../components/icons/Tailwind.astro";
+import TSAndJS from "../components/icons/TSAndJS.astro";
+
+const techs = [
+  { name: "TypeScript & JavaScript", Logo: TSAndJS },
+  { name: "React", Logo: React },
+  { name: "NextJS", Logo: NextJs },
+  { name: "TailwindCSS", Logo: Tailwind },
+];
+---
+
+<ul class="flex flex-wrap items-end justify-evenly gap-8">
+  {
+    techs.map(({ name, Logo }) => (
+      <li class="p-4">
+        <div class="text-center">
+          <div
+            class="mx-auto mb-4 w-24 text-gray-100 lg:w-28"
+            title={`${name} logo`}
+          >
+            <Logo />
+          </div>
+
+          <div class="text-2xl font-bold tracking-wide">{name}</div>
+        </div>
+      </li>
+    ))
+  }
+</ul>

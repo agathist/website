@@ -1,5 +1,6 @@
 ---
-// Yes, this is overkill for now, but eventually we will have additional links
+const { pathname } = new URL(Astro.request.url);
+
 const links = [
   {
     href: "/services",
@@ -9,32 +10,55 @@ const links = [
     href: "/about",
     text: "About",
   },
-];
-
-// Used for currentPage styles
-const { pathname } = new URL(Astro.request.url);
+].map((link) => ({ ...link, isCurrentPage: link.href === pathname }));
 ---
 
-<nav>
-  <ul class="flex items-baseline gap-4">
-    {
-      links.map((link) => {
-        const isCurrentPage = pathname === link.href;
-
-        return (
-          <li>
+<div class="relative">
+  <nav
+    class="absolute right-0 top-full mt-4 hidden bg-slate-800 p-6 lg:static lg:mt-0 lg:block lg:bg-transparent lg:p-0 lg:py-3"
+  >
+    <ul class="items-right flex flex-col gap-4 lg:flex-row lg:items-baseline">
+      {
+        links.map((link) => (
+          <li class="text-right lg:text-left">
             <a
               aria-label={link.text}
-              class={`border-y-4 border-transparent p-2 text-sm uppercase tracking-widest ${
-                isCurrentPage && "border-b-pink-500"
+              class={`border-y-4 border-transparent px-2 py-3 text-sm uppercase tracking-widest ${
+                link.isCurrentPage && "border-b-pink-500"
               }`}
               href={link.href}
             >
               {link.text}
             </a>
           </li>
-        );
-      })
+        ))
+      }
+
+      <li class="mt-4 lg:ml-4 lg:mt-0">
+        <a
+          class="gradient-animation rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 px-6 py-2 text-sm uppercase tracking-widest text-white"
+          href="/contact"
+        >
+          Contact&nbsp;Us
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <button
+    class="group flex flex-col gap-1 rounded border border-gray-200 p-2 transition-all hover:bg-gray-200 lg:hidden"
+    id="nav-toggle"
+  >
+    {
+      [1, 2, 3].map(() => (
+        <div class="h-[2px] w-4 bg-gray-200 transition-all group-hover:bg-slate-900" />
+      ))
     }
-  </ul>
-</nav>
+  </button>
+</div>
+
+<script>
+  document.getElementById("nav-toggle")?.addEventListener("click", () => {
+    document.querySelector("nav")?.classList.toggle("hidden");
+  });
+</script>

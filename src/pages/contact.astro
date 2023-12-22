@@ -1,23 +1,28 @@
 ---
-import ContactUsForm from "../components/ContactUsForm.astro";
+import { ContactUsForm } from "../components/ContactUsForm";
 import Container from "../components/Container.astro";
 import PageHeading from "../components/PageHeading.astro";
-import Todo from "../components/Todo.astro";
 import Layout from "../layouts/Layout.astro";
+import PageStandard from "../layouts/PageStandard.astro";
 ---
 
 <Layout title="Contact Us | Agathist">
-  <main>
+  <PageStandard>
     <Container>
       <div class="flex flex-col gap-8">
         <PageHeading>Contact Us</PageHeading>
 
-        <Todo>TODO: Make form + contact info</Todo>
+        <div class="flex max-w-prose flex-col gap-8">
+          <div class="flex flex-col gap-4 text-xl">
+            <p>
+              We would love to hear about your next project(s) and see how we
+              might be able to work together.
+            </p>
+          </div>
 
-        <div class="max-w-prose">
           <ContactUsForm />
         </div>
       </div>
     </Container>
-  </main>
+  </PageStandard>
 </Layout>
