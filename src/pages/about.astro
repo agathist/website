@@ -5,6 +5,7 @@ import PageHeading from "../components/PageHeading.astro";
 import Prose from "../components/Prose.astro";
 import Layout from "../layouts/Layout.astro";
 import PageStandard from "../layouts/PageStandard.astro";
+import Blockquote from "../components/Blockquote.astro";
 
 const teamEntries = await getCollection("team");
 
@@ -33,11 +34,9 @@ const teammatesSorted = teammates.toSorted(
             <p>You might be asking yourself...</p>
           </Prose>
 
-          <h2 class="font-serif text-5xl">Why "Agathist"?</h2>
+          <h2 class="font-serif text-3xl lg:text-5xl">Why "Agathist"?</h2>
 
-          <div
-            class="flex max-w-prose flex-col gap-8 text-xl font-light leading-relaxed md:text-2xl md:leading-relaxed"
-          >
+          <Prose>
             <p>
               "Agathist" is derived from the Greek word <em>agathos</em>, which
               means "good". An agathist is one who believes that all things
@@ -46,30 +45,34 @@ const teammatesSorted = teammates.toSorted(
 
             <p>
               However, do not mistake an agathist for an optimist. This isn't
-              aboutn finding silver linings or saying things aren't as bad as
-              they seem. Agathism is about acknowledging reality, even when it
-              isn't pretty, and doing the work to make it better, one action at
-              a time.
+              about finding silver linings, glasses half full, or saying things
+              aren't as bad as they seem.
             </p>
+
+            <p>
+              Agathism is about acknowledging reality, even when it isn't
+              pretty, and doing the work to make it better one action at a time.
+            </p>
+
             <p>
               <em>That's</em> how we do things around here.
             </p>
-          </div>
+          </Prose>
         </section>
       </div>
     </Container>
 
     <section
-      class="bg-gradient-to-b from-slate-900 via-pink-900 to-slate-900 py-32"
+      class="bg-gradient-to-b from-slate-900 via-pink-900 to-slate-900 pb-64"
     >
       <Container>
         <div class="flex flex-col gap-16">
-          <h2 class="font-serif text-5xl">Meet our team</h2>
+          <h2 class="font-serif text-3xl lg:text-5xl">Meet our team</h2>
 
           <div class="flex flex-col gap-16">
             {
               teammatesSorted.map(({ Content, data }) => (
-                <div class="flex gap-8 rounded-lg bg-slate-900/50 p-8">
+                <div class="flex flex-col gap-8 rounded-lg bg-slate-900/50 p-8 md:flex-row">
                   <div class="h-48 w-48 shrink-0 grow-0 rounded-2xl bg-white/10">
                     {data.imgUrl && <img src={data.imgUrl} alt={data.name} />}
                   </div>
@@ -83,7 +86,7 @@ const teammatesSorted = teammates.toSorted(
                     </div>
 
                     <Prose>
-                      <Content />
+                      <Content components={{ blockquote: Blockquote }} />
                     </Prose>
                   </div>
                 </div>
