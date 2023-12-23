@@ -1,14 +1,12 @@
 ---
+import GradientText from "./GradientText.astro";
 import Nav from "./Nav.astro";
 ---
 
 <header class="sticky top-0 z-10 bg-slate-900 px-8 py-4 shadow">
   <div class="flex items-center justify-between gap-4">
-    <a
-      class="text-xl font-bold text-pink-500 transition-all hover:text-orange-400 md:text-2xl"
-      href="/"
-    >
-      Agathist
+    <a class="text-xl font-bold transition-all md:text-2xl" href="/">
+      <GradientText>Agathist</GradientText>
     </a>
 
     <Nav />

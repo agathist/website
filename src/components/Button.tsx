@@ -14,7 +14,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className="relative rounded bg-gradient-to-r from-pink-500 to-rose-500 px-4 py-2 transition-all active:top-[1px]"
+      className="relative rounded bg-gradient-to-r from-pink-500 via-rose-500 to-orange-400 bg-[length:115%] px-4 py-2 transition-all active:top-[1px]"
       onClick={onClick}
       type={type}
       {...rest}

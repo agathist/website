@@ -2,6 +2,7 @@
 import { ContactUsForm } from "../components/ContactUsForm";
 import Container from "../components/Container.astro";
 import PageHeading from "../components/PageHeading.astro";
+import Prose from "../components/Prose.astro";
 import Layout from "../layouts/Layout.astro";
 import PageStandard from "../layouts/PageStandard.astro";
 ---
@@ -13,12 +14,12 @@ import PageStandard from "../layouts/PageStandard.astro";
         <PageHeading>Contact Us</PageHeading>
 
         <div class="flex max-w-prose flex-col gap-8">
-          <div class="flex flex-col gap-4 text-xl">
+          <Prose>
             <p>
               We would love to hear about your next project(s) and see how we
               might be able to work together.
             </p>
-          </div>
+          </Prose>
 
           <ContactUsForm />
         </div>
