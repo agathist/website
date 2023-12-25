@@ -28,14 +28,27 @@ const FIELDS = [
   },
 ];
 
-// TODO: Remove when real API exists
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+function submitFormDataToAPI(
+  formData: z.infer<typeof formSchema>,
+  result = true,
+): Promise<string> {
+  // TODO: do something real with the formData
+  console.log(formData);
 
-type SubmitState = "idle" | "pending";
+  return new Promise((resolve, reject) =>
+    setTimeout(() => {
+      result ? resolve("success") : reject("Bad things happened");
+    }, 1000),
+  );
+}
+
+type SubmitState = "idle" | "pending" | "success" | "failure";
 
 const BUTTON_TEXT: Record<SubmitState, string> = {
+  failure: "Failed!",
   idle: "Submit",
   pending: "Submitting...",
+  success: "Success!",
 };
 
 export function ContactUsForm() {
@@ -64,10 +77,10 @@ export function ContactUsForm() {
       const formData = Object.fromEntries(new FormData(target));
 
       // Validate the result
-      const result = formSchema.safeParse(formData);
+      const validationResult = formSchema.safeParse(formData);
 
-      if (!result.success) {
-        const nextErrors = result.error.issues.map((issue) => ({
+      if (!validationResult.success) {
+        const nextErrors = validationResult.error.issues.map((issue) => ({
           key: String(issue.path.at(0)),
           message: issue.message,
         }));
@@ -78,49 +91,71 @@ export function ContactUsForm() {
 
       setSubmitState("pending");
 
-      // TODO: submit the form to the API here
-      await wait(1000);
-
-      // TODO: Need an API success/fail state + messages
-
-      console.log(result);
-      target.reset();
-      setSubmitState("idle");
+      await submitFormDataToAPI(validationResult.data)
+        .then(
+          () => {
+            setSubmitState("success");
+            target.reset();
+          },
+          () => {
+            setSubmitState("failure");
+          },
+        )
+        .catch((err) => {
+          // TODO: log the error some how
+          console.error(err);
+          setSubmitState("failure");
+        });
     },
     [],
   );
 
   return (
-    <form
-      className="flex flex-col gap-4"
-      id="contact-us"
-      onSubmit={handleSubmit}
-    >
-      {FIELDS.map(({ Component, ...fieldProps }) => (
-        <div key={fieldProps.id}>
-          <Component {...fieldProps} />
+    <div className="flex flex-col gap-8">
+      <form
+        className="flex flex-col gap-4"
+        id="contact-us"
+        onSubmit={handleSubmit}
+      >
+        {FIELDS.map(({ Component, ...fieldProps }) => (
+          <div key={fieldProps.id}>
+            <Component {...fieldProps} />
 
-          {/**
-           * Having the potentially empty div here helps with spacing and
-           * less layout shift when errors are present
-           *
-           * TODO: might make sense to move errors to a prop to the inputs
-           */}
-          <div className="flex flex-col gap-1 py-2">
-            {errors
-              .filter((err) => err.key === fieldProps.id)
-              .map((err) => (
-                <div className="text-sm text-pink-500" key={err.message}>
-                  {err.message}
-                </div>
-              ))}
+            {/**
+             * Having the potentially empty div here helps with spacing and
+             * less layout shift when errors are present
+             *
+             * TODO: might make sense to move errors to a prop to the inputs
+             */}
+            <div className="flex flex-col gap-1 py-2">
+              {errors
+                .filter((err) => err.key === fieldProps.id)
+                .map((err) => (
+                  <div className="text-sm text-pink-500" key={err.message}>
+                    {err.message}
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-      <Button disabled={submitState === "pending"} type="submit">
-        {BUTTON_TEXT[submitState]}
-      </Button>
-    </form>
+        <Button disabled={submitState === "pending"} type="submit">
+          {BUTTON_TEXT[submitState]}
+        </Button>
+      </form>
+
+      {submitState === "success" && (
+        <div className="text-emerald-500">
+          Submission successful! We look forward to reading about your project.
+        </div>
+      )}
+
+      {submitState === "failure" && (
+        <div className="text-pink-500">
+          Sorry about that! Something went wrong while submitting your project.
+          Please try again.
+        </div>
+      )}
+    </div>
   );
 }
