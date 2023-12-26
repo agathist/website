@@ -1,16 +1,16 @@
 ---
-const { pathname } = new URL(Astro.request.url);
+const { pathname } = new URL(Astro.request.url)
 
 const links = [
   {
-    href: "/services",
-    text: "Services",
+    href: '/services',
+    text: 'Services',
   },
   {
-    href: "/about",
-    text: "About",
+    href: '/about',
+    text: 'About',
   },
-].map((link) => ({ ...link, isCurrentPage: link.href === pathname }));
+].map((link) => ({ ...link, isCurrentPage: link.href === pathname }))
 ---
 
 <div class="relative">
@@ -24,7 +24,7 @@ const links = [
             <a
               aria-label={link.text}
               class={`border-y-4 border-transparent px-2 py-3 text-sm uppercase tracking-widest ${
-                link.isCurrentPage && "border-b-pink-500"
+                link.isCurrentPage && 'border-b-pink-500'
               }`}
               href={link.href}
             >
@@ -58,7 +58,7 @@ const links = [
 </div>
 
 <script>
-  document.getElementById("nav-toggle")?.addEventListener("click", () => {
-    document.querySelector("nav")?.classList.toggle("hidden");
-  });
+  document.getElementById('nav-toggle')?.addEventListener('click', () => {
+    document.querySelector('nav')?.classList.toggle('hidden')
+  })
 </script>

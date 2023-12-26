@@ -1,28 +1,28 @@
 ---
-import { getCollection } from "astro:content";
-import Container from "../components/Container.astro";
-import PageHeading from "../components/PageHeading.astro";
-import TechExpertise from "../components/TechExpertise.astro";
-import Layout from "../layouts/Layout.astro";
-import PageStandard from "../layouts/PageStandard.astro";
-import Prose from "../components/Prose.astro";
+import { getCollection } from 'astro:content'
+import Container from '../components/Container.astro'
+import PageHeading from '../components/PageHeading.astro'
+import TechExpertise from '../components/TechExpertise.astro'
+import Layout from '../layouts/Layout.astro'
+import PageStandard from '../layouts/PageStandard.astro'
+import Prose from '../components/Prose.astro'
 
 const servicesEntries = await getCollection(
-  "services",
+  'services',
   // Filter for published services
-  (entry) => entry.data.published,
-);
+  (entry) => entry.data.published
+)
 
 const services = await Promise.all(
   servicesEntries.map(async (entry) => {
-    const { data } = entry;
-    const { Content } = await entry.render();
+    const { data } = entry
+    const { Content } = await entry.render()
 
-    return { Content, data };
-  }),
-);
+    return { Content, data }
+  })
+)
 
-const sortedServices = services.toSorted((a, b) => a.data.order - b.data.order);
+const sortedServices = services.toSorted((a, b) => a.data.order - b.data.order)
 ---
 
 <Layout title="Services | Agathist">

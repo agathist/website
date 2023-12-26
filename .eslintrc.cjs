@@ -30,7 +30,7 @@ module.exports = {
     },
     {
       files: ["*.tsx"],
-      extends: ["plugin:react/recommended"],
+      extends: ["plugin:react/recommended", "plugin:react-hooks/recommended"],
       plugins: ["react"],
       settings: {
         react: {

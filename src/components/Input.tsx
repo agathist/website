@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react'
 
 export type InputProps = {
-  id?: string;
-  label?: string;
-  required?: boolean;
-  type?: HTMLInputElement["type"];
-} & Record<string, unknown>;
+  id?: string
+  label?: string
+  required?: boolean
+  type?: HTMLInputElement['type']
+} & Record<string, unknown>
 
 export function Input({
   id,
   label,
   required = false,
-  type = "text",
+  type = 'text',
   ...rest
 }: InputProps) {
   return (
@@ -27,5 +27,5 @@ export function Input({
         type={type}
       />
     </label>
-  );
+  )
 }

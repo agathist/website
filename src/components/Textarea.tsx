@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
 export type TextareaProps = {
-  id?: string;
-  label?: string;
-  required?: boolean;
-  rows?: number;
-};
+  id?: string
+  label?: string
+  required?: boolean
+  rows?: number
+}
 
 export function Textarea({
   id,
@@ -25,5 +25,5 @@ export function Textarea({
         rows={rows}
       ></textarea>
     </label>
-  );
+  )
 }

@@ -1,26 +1,26 @@
 ---
-import { getCollection } from "astro:content";
-import Container from "../components/Container.astro";
-import PageHeading from "../components/PageHeading.astro";
-import Prose from "../components/Prose.astro";
-import Layout from "../layouts/Layout.astro";
-import PageStandard from "../layouts/PageStandard.astro";
-import Blockquote from "../components/Blockquote.astro";
+import { getCollection } from 'astro:content'
+import Container from '../components/Container.astro'
+import PageHeading from '../components/PageHeading.astro'
+import Prose from '../components/Prose.astro'
+import Layout from '../layouts/Layout.astro'
+import PageStandard from '../layouts/PageStandard.astro'
+import Blockquote from '../components/Blockquote.astro'
 
-const teamEntries = await getCollection("team");
+const teamEntries = await getCollection('team')
 
 const teammates = await Promise.all(
   teamEntries.map(async (entry) => {
-    const { data } = entry;
-    const { Content } = await entry.render();
+    const { data } = entry
+    const { Content } = await entry.render()
 
-    return { Content, data };
-  }),
-);
+    return { Content, data }
+  })
+)
 
 const teammatesSorted = teammates.toSorted(
-  (a, b) => a.data.order - b.data.order,
-);
+  (a, b) => a.data.order - b.data.order
+)
 ---
 
 <Layout title="About | Agathist">

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 export function Copyright() {
-  const year = new Date().getFullYear();
+  const year = new Date().getFullYear()
 
-  return <span>&copy;{year}</span>;
+  return <span>&copy;{year}</span>
 }
