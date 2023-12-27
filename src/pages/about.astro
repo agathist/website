@@ -5,22 +5,14 @@ import PageHeading from '../components/PageHeading.astro'
 import Prose from '../components/Prose.astro'
 import Layout from '../layouts/Layout.astro'
 import PageStandard from '../layouts/PageStandard.astro'
-import Blockquote from '../components/Blockquote.astro'
+import Teammate from '../components/Teammate.astro'
 
-const teamEntries = await getCollection('team')
+const teamEntries = await getCollection('team', (entry) => {
+  // If we are in PROD, hide the unpublished teammates
+  if (import.meta.env.PROD) return entry.data.published
 
-const teammates = await Promise.all(
-  teamEntries.map(async (entry) => {
-    const { data } = entry
-    const { Content } = await entry.render()
-
-    return { Content, data }
-  })
-)
-
-const teammatesSorted = teammates.toSorted(
-  (a, b) => a.data.order - b.data.order
-)
+  return true
+}).then((entries) => entries.toSorted((a, b) => a.data.order - b.data.order))
 ---
 
 <Layout title="About | Agathist">
@@ -70,28 +62,7 @@ const teammatesSorted = teammates.toSorted(
           <h2 class="font-serif text-3xl lg:text-5xl">Meet our team</h2>
 
           <div class="flex flex-col gap-16">
-            {
-              teammatesSorted.map(({ Content, data }) => (
-                <div class="flex flex-col gap-8 rounded-lg bg-slate-900/50 p-8 md:flex-row">
-                  <div class="h-48 w-48 shrink-0 grow-0 rounded-2xl bg-white/10">
-                    {data.imgUrl && <img src={data.imgUrl} alt={data.name} />}
-                  </div>
-
-                  <div class="flex shrink grow flex-col gap-8">
-                    <div class="flex flex-col gap-2">
-                      <div class="font-serif text-4xl">{data.name}</div>
-                      <div class="text-xl font-light tracking-wider text-pink-400">
-                        {data.role}
-                      </div>
-                    </div>
-
-                    <Prose>
-                      <Content components={{ blockquote: Blockquote }} />
-                    </Prose>
-                  </div>
-                </div>
-              ))
-            }
+            {teamEntries.map((entry) => <Teammate teammate={entry} />)}
           </div>
         </div>
       </Container>
