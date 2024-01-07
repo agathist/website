@@ -1,10 +1,9 @@
 ---
-const disciplines = [
-  'Web & Mobile Development',
-  'Codebase Improvement',
-  'Design Systems',
-  'Team Augmentation',
-  'Workshops',
+import { getCollection } from 'astro:content'
+
+const servicesEntries = await getCollection('services')
+const services = [
+  ...servicesEntries.map((entry) => entry.data.title),
   'And more...',
 ]
 ---
@@ -14,10 +13,10 @@ const disciplines = [
 
   <ul class="grid grid-cols-2 gap-6 text-2xl font-light">
     {
-      disciplines.map((item) => (
+      services.map((title) => (
         <li>
           <div class="flex h-full flex-col justify-end">
-            <div class="p-2">{item}</div>
+            <div class="p-2">{title}</div>
             <div class="h-1 bg-gradient-to-br from-pink-500 to-rose-500" />
           </div>
         </li>

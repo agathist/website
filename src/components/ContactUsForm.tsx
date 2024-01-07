@@ -12,6 +12,7 @@ const cannotBeEmpty = 'Field cannot be empty'
 const formSchema = z.object({
   firstName: z.string(required).min(1, cannotBeEmpty).max(64),
   lastName: z.string(required).min(1, cannotBeEmpty).max(64),
+  companyName: z.string().max(64),
   email: z.string(required).min(1, cannotBeEmpty).email(),
   projectSummary: z.string(required).min(1, cannotBeEmpty).max(2500),
 })
@@ -20,6 +21,7 @@ const formSchema = z.object({
 const FIELDS = [
   { Component: Input, id: 'firstName', label: 'First Name' },
   { Component: Input, id: 'lastName', label: 'Last Name' },
+  { Component: Input, id: 'companyName', label: 'Company Name' },
   { Component: Input, id: 'email', label: 'Email', type: 'email' },
   {
     Component: Textarea,
@@ -28,18 +30,17 @@ const FIELDS = [
   },
 ]
 
-function submitFormDataToAPI(
-  formData: z.infer<typeof formSchema>,
-  result = true
-): Promise<string> {
-  // TODO: do something real with the formData
-  console.log(formData)
+function submitFormDataToAPI(formData: z.infer<typeof formSchema>) {
+  const now = new Date()
+  const timezoneOffset = now.getTimezoneOffset()
 
-  return new Promise((resolve, reject) =>
-    setTimeout(() => {
-      result ? resolve('success') : reject('Bad things happened')
-    }, 1000)
-  )
+  return fetch('/.netlify/functions/contact-us', {
+    method: 'POST',
+    body: JSON.stringify({
+      ...formData,
+      timezoneOffset,
+    }),
+  })
 }
 
 type SubmitState = 'idle' | 'pending' | 'success' | 'failure'
@@ -91,19 +92,19 @@ export function ContactUsForm() {
 
       setSubmitState('pending')
 
-      await submitFormDataToAPI(validationResult.data)
-        .then(
-          () => {
-            setSubmitState('success')
-            target.reset()
-            setTimeout(() => {
-              setSubmitState('idle')
-            }, 5000)
-          },
-          () => {
+      submitFormDataToAPI(validationResult.data)
+        .then((response: Response) => {
+          if (!response.ok) {
             setSubmitState('failure')
+            return
           }
-        )
+
+          setSubmitState('success')
+          target.reset()
+          setTimeout(() => {
+            setSubmitState('idle')
+          }, 5000)
+        })
         .catch((err) => {
           // TODO: log the error some how
           console.error(err)
