@@ -66,7 +66,7 @@ function addToAirtable(data: Data) {
     process.env.AIRTABLE_BASE_ID as string
   )
 
-  return base('Submissions').create(data)
+  return base(process.env.AIRTABLE_TABLE_KEY as string).create(data)
 }
 
 export default async function (req: Request) {
