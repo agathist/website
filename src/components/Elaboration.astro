@@ -3,8 +3,10 @@ import { getCollection } from 'astro:content'
 
 const servicesEntries = await getCollection('services')
 const services = [
-  ...servicesEntries.map((entry) => entry.data.title),
-  'And more...',
+  ...servicesEntries
+    .toSorted((a, b) => a.data.order - b.data.order)
+    .map((entry) => ({ slug: entry.slug, title: entry.data.title })),
+  { slug: '', title: 'And more...' },
 ]
 ---
 
@@ -13,12 +15,14 @@ const services = [
 
   <ul class="grid grid-cols-2 gap-6 text-2xl font-light">
     {
-      services.map((title) => (
+      services.map(({ slug, title }) => (
         <li>
-          <div class="flex h-full flex-col justify-end">
-            <div class="p-2">{title}</div>
-            <div class="h-1 bg-gradient-to-br from-pink-500 to-rose-500" />
-          </div>
+          <a class="group block " href={`/services${slug && '#' + slug}`}>
+            <div class="flex h-full flex-col justify-end rounded-t transition-colors group-hover:bg-slate-700">
+              <div class="p-2">{title}</div>
+              <div class="h-1 bg-gradient-to-br from-pink-500 to-rose-500" />
+            </div>
+          </a>
         </li>
       ))
     }

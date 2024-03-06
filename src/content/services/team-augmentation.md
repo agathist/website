@@ -1,6 +1,6 @@
 ---
-title: "Team Augmentation"
-order: 4
+title: 'Team Augmentation'
+order: 6
 published: true
 ---
 
