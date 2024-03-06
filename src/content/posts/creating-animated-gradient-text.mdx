@@ -1,0 +1,69 @@
+---
+date: '2024-03-06T03:55:35.449Z'
+title: 'Creating Animated Gradient Text'
+description: 'Learn how to create an animated gradient text effect like our logo with Astro and Tailwind'
+---
+
+First, get yourself some text in an element set to `display: inline-block`. It's important that we use `inline-block` because we need to add a background gradient to our text (which requires `block` level), but we only want that background to be the width of our text (which requires `inline` level).
+
+I'll be using Tailwind CSS classes throughout this example, but you're welcome to do the equivalent with whatever flavor of CSS you prefer.
+
+```html
+<div class="inline-block">Gradient Text Rules!</div>
+```
+
+<div class="flex">
+  <div class="inline-block">Gradient Text Rules!</div>
+</div>
+
+Next, add a background gradient of your choosing. I'll use the Agathist one.
+
+```html
+<div
+  class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400"
+>
+  Gradient Text Rules!
+</div>
+```
+
+<div class="flex">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400">
+    Gradient Text Rules!
+  </div>
+</div>
+
+Next, we're going to make the text transparent. Bye bye, text!
+
+```html
+<div
+  class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 text-transparent"
+>
+  Gradient Text Rules!
+</div>
+```
+
+<div class="flex">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 text-transparent">
+    Gradient Text Rules!
+  </div>
+</div>
+
+Then, we're going to clip the background to the text with `bg-clip-text`, like so:
+
+```html
+<div
+  class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-clip-text text-transparent"
+>
+  Gradient Text Rules!
+</div>
+```
+
+<div class="flex">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-clip-text text-transparent">
+    Gradient Text Rules!
+  </div>
+</div>
+
+And check that out! Now, let's animate it.
+
+With Tailwind, we can define custom animations in the config file. We're going to create a custom `backAndForth` animation, like so:

@@ -1,0 +1,57 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { byEntryDate, formatPostDate } from '../../utils'
+import Layout from '../../layouts/Layout.astro'
+import PageStandard from '../../layouts/PageStandard.astro'
+import Container from '../../components/Container.astro'
+import PageHeading from '../../components/PageHeading.astro'
+import GradientText from '../../components/GradientText.astro'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const postEntries = await getCollection('posts')
+  const postsSorted = postEntries.toSorted(byEntryDate)
+
+  return postsSorted.map((entry) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+    },
+  }))
+}
+
+interface Props {
+  entry: CollectionEntry<'posts'>
+}
+
+const props = Astro.props
+const { entry } = props
+const { date, description, title } = entry.data
+const { Content } = await entry.render()
+
+const formattedDate = formatPostDate(date)
+---
+
+<Layout description={description} title={`${title} | Blog | Agathist`}>
+  <PageStandard>
+    <Container>
+      <div class="flex flex-col gap-8">
+        <div class="w-3/4">
+          <GradientText>
+            <h2 class="text-6xl font-bold leading-tight">
+              {title}
+            </h2>
+          </GradientText>
+        </div>
+
+        <div class="flex">
+          <div class="border-b-2 border-pink-500 text-lg">{formattedDate}</div>
+        </div>
+
+        <div class="flex flex-col gap-8">
+          <Content />
+        </div>
+      </div>
+    </Container>
+  </PageStandard>
+</Layout>
