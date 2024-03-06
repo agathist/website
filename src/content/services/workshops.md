@@ -1,6 +1,6 @@
 ---
-title: "Workshops"
-order: 5
+title: 'Workshops'
+order: 7
 published: true
 ---
 
