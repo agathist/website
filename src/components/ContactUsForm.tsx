@@ -53,6 +53,10 @@ const BUTTON_TEXT: Record<SubmitState, string> = {
 }
 
 type ContactUsFormProps = {
+  /**
+   * By making this a prop, we make it easy to pass in a mock function for
+   * testing and do not have to mock the fetch of the serverless function
+   */
   submissionFn?: typeof submitFormDataToAPI
 }
 
