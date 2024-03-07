@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import Link from './Link.astro'
 
 const servicesEntries = await getCollection('services')
 const services = [
@@ -16,13 +17,10 @@ const services = [
   <ul class="grid grid-cols-2 gap-6 text-2xl font-light">
     {
       services.map(({ slug, title }) => (
-        <li>
-          <a class="group block " href={`/services${slug && '#' + slug}`}>
-            <div class="flex h-full flex-col justify-end rounded-t transition-colors group-hover:bg-slate-700">
-              <div class="p-2">{title}</div>
-              <div class="h-1 bg-gradient-to-br from-pink-500 to-rose-500" />
-            </div>
-          </a>
+        <li class="flex flex-col justify-end">
+          <Link block={true} href={`/services${slug && '#' + slug}`}>
+            <div class="p-2">{title}</div>
+          </Link>
         </li>
       ))
     }

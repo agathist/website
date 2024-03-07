@@ -6,6 +6,7 @@ import Layout from '../../layouts/Layout.astro'
 import PageStandard from '../../layouts/PageStandard.astro'
 import Container from '../../components/Container.astro'
 import GradientText from '../../components/GradientText.astro'
+import Link from '../../components/Link.astro'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const postEntries = await getCollection('posts')
@@ -57,19 +58,19 @@ const formattedDate = formatPostDate(date)
             </h2>
           </GradientText>
 
-          <div class="italic text-gray-200">Written by {author.data.name}</div>
-        </div>
-
-        <div class="flex">
-          <div class="border-b-4 border-pink-500 p-1">
-            {formattedDate}
+          <div class="flex items-baseline gap-2 italic text-gray-200">
+            <div>
+              Written by {author.data.name}
+            </div>
+            <div>&mdash;</div>
+            <div>{formattedDate}</div>
           </div>
         </div>
 
         <div
           class="post flex max-w-prose flex-col gap-8 leading-relaxed lg:text-xl lg:leading-relaxed"
         >
-          <Content />
+          <Content components={{ a: Link }} />
         </div>
 
         <hr class="my-8 border-slate-600" />

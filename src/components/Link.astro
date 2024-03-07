@@ -1,0 +1,17 @@
+---
+interface Props {
+  block?: boolean
+  href: string
+}
+
+const { block = false, href } = Astro.props
+---
+
+<a
+  class={`${
+    block ? 'block' : 'inline-block'
+  } border-b-4 border-b-pink-500 hover:bg-pink-500`}
+  href={href}
+>
+  <slot />
+</a>

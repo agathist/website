@@ -27,7 +27,9 @@ I'll use plain CSS so anyone can follow along, but you should be able to transla
 That will look like this:
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block text-4xl font-bold">Gradient text is awesome!</div>
+  <div class="inline-block text-2xl font-bold md:text-4xl">
+    Gradient text is awesome!
+  </div>
 </div>
 
 Next, add a background gradient of your choosing. I'll use the Agathist one.
@@ -42,7 +44,7 @@ Next, add a background gradient of your choosing. I'll use the Agathist one.
 ```
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 text-4xl font-bold">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 text-2xl font-bold md:text-4xl">
     Gradient text is awesome!
   </div>
 </div>
@@ -60,7 +62,7 @@ Next, we're going to make the `color` of the text `transparent`. Bye bye, text! 
 ```
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 text-4xl font-bold text-transparent">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 text-2xl font-bold text-transparent md:text-4xl">
     Gradient text is awesome!
   </div>
 </div>
@@ -79,7 +81,7 @@ In order to bring the text back, we're going to set `background-clip` to `text`,
 ```
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-clip-text text-4xl font-bold text-transparent">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-clip-text text-2xl font-bold text-transparent md:text-4xl">
     Gradient text is awesome!
   </div>
 </div>
@@ -103,7 +105,7 @@ Increasing the `background-size` _stretches_ the gradient. Notice that the orang
 ```
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-[length:200%] bg-clip-text text-4xl font-bold text-transparent">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-[length:200%] bg-clip-text text-2xl font-bold text-transparent md:text-4xl">
     Gradient text is awesome!
   </div>
 </div>
@@ -124,7 +126,7 @@ It's not that the orange color is missing, it's that the gradient has been stret
 ```
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-[length:200%] bg-clip-text bg-right text-4xl font-bold text-transparent">
+  <div class="inline-block bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-[length:200%] bg-clip-text bg-right text-2xl font-bold text-transparent md:text-4xl">
     Gradient text is awesome!
   </div>
 </div>
@@ -155,7 +157,7 @@ Now, we can only see the pink and orange colors. Let's remove our `background-po
 ```
 
 <div class="flex bg-slate-800 p-8">
-  <div class="inline-block animate-backAndForth bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-[length:200%] bg-clip-text text-4xl font-bold text-transparent">
+  <div class="inline-block animate-backAndForth bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 bg-[length:200%] bg-clip-text text-2xl font-bold text-transparent md:text-4xl">
     Gradient text is awesome!
   </div>
 </div>

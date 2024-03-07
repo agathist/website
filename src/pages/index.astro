@@ -3,6 +3,7 @@ import Banner from '../components/Banner.astro'
 import { ContactUsForm } from '../components/ContactUsForm.tsx'
 import Container from '../components/Container.astro'
 import Elaboration from '../components/Elaboration.astro'
+import Link from '../components/Link.astro'
 import TechExpertise from '../components/TechExpertise.astro'
 import Layout from '../layouts/Layout.astro'
 ---
@@ -95,8 +96,7 @@ import Layout from '../layouts/Layout.astro'
           <div class="flex flex-col gap-4 text-xl font-light lg:text-2xl">
             <p class="leading-relaxed">
               No one yet, but you have to start somewhere! <span
-                class="inline-block border-b-4 border-b-pink-500 font-bold"
-                >Want to be the&nbsp;first?</span
+                class="font-bold text-pink-500">Want to be the&nbsp;first?</span
               >
             </p>
 
@@ -126,10 +126,11 @@ import Layout from '../layouts/Layout.astro'
           <div class="font-serif text-3xl lg:text-5xl">Contact Us</div>
 
           <p class="text-xl md:text-2xl">
-            Fill out the form below or send us an email at <a
-              class="border-b-4 border-b-pink-500 hover:text-gray-100"
-              href="mailto:hello@agath.ist">hello@agath.ist</a
+            Fill out the form below or send us an email at <Link
+              href="mailto:hello@agath.ist"
             >
+              hello@agath.ist
+            </Link>
           </p>
         </div>
 
