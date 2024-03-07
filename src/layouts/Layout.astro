@@ -11,7 +11,7 @@ interface Props {
 }
 
 const DEFAULT_DESCRIPTION =
-  'Agathist is a software development agency with expertise in TypeScript, JavaScript and React. We build good software with good people.'
+  'Agathist is a software development firm with expertise in TypeScript, JavaScript, and React. We build good software with good people.'
 
 const { author, description = DEFAULT_DESCRIPTION, title } = Astro.props
 ---
@@ -23,23 +23,34 @@ const { author, description = DEFAULT_DESCRIPTION, title } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:type" content="website" />
     <title>{title}</title>
-    <meta property="og:title" content={title} />
-    <meta property="twitter:title" content={title} />
-    <meta name="apple-mobile-web-app-title" content="Agathist" />
-    <meta property="og:site_name" content="Agathist" />
-    <meta name="description" property="og:description" content={description} />
-    <meta name="twitter:description" content={description} />
+    <meta name="description" content={description} />
     {author && <meta name="author" content={author} />}
+
+    <!-- OpenGraph -->
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Agathist" />
     <meta
       property="og:image"
       content="https://agath.ist/images/agathist-og-image.png"
     />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content="agath.ist" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta
-      name="twitter:image:src"
+      name="twitter:image"
       content="https://agath.ist/images/agathist-og-image.png"
     />
+
+    <!-- Miscellany -->
+    <meta name="apple-mobile-web-app-title" content="Agathist" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
