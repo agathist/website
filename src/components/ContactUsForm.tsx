@@ -52,7 +52,17 @@ const BUTTON_TEXT: Record<SubmitState, string> = {
   success: 'Success!',
 }
 
-export function ContactUsForm() {
+type ContactUsFormProps = {
+  /**
+   * By making this a prop, we make it easy to pass in a mock function for
+   * testing and do not have to mock the fetch of the serverless function
+   */
+  submissionFn?: typeof submitFormDataToAPI
+}
+
+export function ContactUsForm({
+  submissionFn = submitFormDataToAPI,
+}: ContactUsFormProps) {
   const [submitState, setSubmitState] = React.useState<SubmitState>('idle')
 
   const [errors, setErrors] = React.useState<
@@ -62,6 +72,8 @@ export function ContactUsForm() {
   const handleSubmit = React.useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
+
+      if (submitState === 'pending') return
 
       /**
        * We have to save the current target as it is the form, and we will lose
@@ -92,7 +104,7 @@ export function ContactUsForm() {
 
       setSubmitState('pending')
 
-      submitFormDataToAPI(validationResult.data)
+      submissionFn(validationResult.data)
         .then((response: Response) => {
           if (!response.ok) {
             setSubmitState('failure')
@@ -111,7 +123,7 @@ export function ContactUsForm() {
           setSubmitState('failure')
         })
     },
-    []
+    [submissionFn, submitState]
   )
 
   return (
