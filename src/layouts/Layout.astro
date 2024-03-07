@@ -2,8 +2,10 @@
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import '../styles/globals.css'
+import '../styles/fonts.css'
 
 interface Props {
+  author?: string
   description?: string
   title: string
 }
@@ -11,7 +13,7 @@ interface Props {
 const DEFAULT_DESCRIPTION =
   'Agathist is a software development agency with expertise in TypeScript, JavaScript and React. We build good software with good people.'
 
-const { description = DEFAULT_DESCRIPTION, title } = Astro.props
+const { author, description = DEFAULT_DESCRIPTION, title } = Astro.props
 ---
 
 <!doctype html>
@@ -21,20 +23,27 @@ const { description = DEFAULT_DESCRIPTION, title } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" />
     <meta name="generator" content={Astro.generator} />
-    {
-      description && (
-        <>
-          <meta
-            name="description"
-            property="og:description"
-            content={description}
-          />
-          <meta name="twitter:description" content={description} />
-        </>
-      )
-    }
+    <meta property="og:type" content="website" />
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="twitter:title" content={title} />
+    <meta name="apple-mobile-web-app-title" content="Agathist" />
+    <meta property="og:site_name" content="Agathist" />
+    <meta name="description" property="og:description" content={description} />
+    <meta name="twitter:description" content={description} />
+    {author && <meta name="author" content={author} />}
+    <meta
+      property="og:image"
+      content="https://agathist.com/images/agathist-og-image.png"
+    />
+    <meta
+      name="twitter:image:src"
+      content="https://agathist.com/images/agathist-og-image.png"
+    />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
+
   <body class="flex min-h-full flex-col">
     <Header />
 
@@ -47,37 +56,3 @@ const { description = DEFAULT_DESCRIPTION, title } = Astro.props
     </div>
   </body>
 </html>
-
-<style is:global>
-  @font-face {
-    font-family: 'Droid Serif';
-    src: url('/fonts/DroidSerif-Regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Droid Serif';
-    src: url('/fonts/DroidSerif-Bold-webfont.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
-
-  strong {
-    font-weight: 700;
-  }
-</style>

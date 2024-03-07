@@ -47,7 +47,11 @@ const { Content } = await entry.render()
 const formattedDate = formatPostDate(date)
 ---
 
-<Layout description={description} title={`${title} | Blog | Agathist`}>
+<Layout
+  author={author.data.name}
+  description={description}
+  title={`${title} | Blog | Agathist`}
+>
   <PageStandard>
     <Container>
       <article class="flex flex-col gap-8">
