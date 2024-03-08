@@ -1,25 +1,57 @@
 ---
 import { Copyright } from './Copyright'
+import Github from './icons/Github.astro'
+import LinkedIn from './icons/LinkedIn.astro'
+import Twitter from './icons/Twitter.astro'
 
 const links = [
   { href: '/services', text: 'Services' },
   { href: '/about', text: 'About' },
   { href: '/contact', text: 'Contact Us' },
 ]
+
+const socialMedia = [
+  { href: 'https://github.com/agathist', Icon: Github, title: 'Github' },
+  { href: 'https://twitter.com/agathist_', Icon: Twitter, title: 'Twitter' },
+  {
+    href: 'https://linkedin.com/company/agathist',
+    Icon: LinkedIn,
+    title: 'LinkedIn',
+  },
+]
 ---
 
-<footer class="flex items-end justify-between p-8">
-  <p><Copyright client:load /> Agathist</p>
-
-  <nav>
-    <ul class="flex gap-6">
+<footer
+  class="flex flex-col items-center gap-8 p-8 sm:flex-row-reverse sm:items-end sm:justify-between sm:gap-4"
+>
+  <div class="flex flex-col items-center gap-8 sm:items-end sm:gap-6">
+    <div class="flex items-center gap-8">
       {
-        links.map((link) => (
-          <a class="text-gray-300 hover:text-white" href={link.href}>
-            {link.text}
+        socialMedia.map(({ href, Icon, title }) => (
+          <a
+            class="transition-color block h-8 w-8 text-rose-400 hover:text-pink-500"
+            href={href}
+            title={title}
+            target="_blank"
+          >
+            <Icon />
           </a>
         ))
       }
-    </ul>
-  </nav>
+    </div>
+
+    <nav>
+      <ul class="flex gap-6">
+        {
+          links.map((link) => (
+            <a class="text-gray-300 hover:text-white" href={link.href}>
+              {link.text}
+            </a>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <p><Copyright client:load /> Agathist</p>
 </footer>
