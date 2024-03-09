@@ -15,7 +15,7 @@ const servicesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    order: z.number(),
+    order: z.number().default(Infinity),
     published: z.boolean().default(false),
   }),
 })
@@ -27,7 +27,20 @@ const teamCollection = defineCollection({
     role: z.string(),
     email: z.string().optional(),
     imgUrl: z.string().optional(),
-    order: z.number(),
+    order: z.number().default(Infinity),
+    published: z.boolean().default(false),
+  }),
+})
+
+const technologiesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    /**
+     * Should match an id of an icon in our icon sprite svg
+     */
+    iconName: z.string(),
+    order: z.number().default(Infinity),
     published: z.boolean().default(false),
   }),
 })
@@ -36,4 +49,5 @@ export const collections = {
   posts: postsCollection,
   services: servicesCollection,
   team: teamCollection,
+  technologies: technologiesCollection,
 }

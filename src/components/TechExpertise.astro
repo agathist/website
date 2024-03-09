@@ -1,34 +1,36 @@
 ---
-import NextJs from './icons/NextJs.astro'
-import React from './icons/React.astro'
-import Tailwind from './icons/Tailwind.astro'
-import TSAndJS from './icons/TSAndJS.astro'
-import AstroSvg from './icons/AstroSvg.astro'
+import { Icon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
 
-const techs = [
-  { name: 'TypeScript & JavaScript', Logo: TSAndJS },
-  { name: 'React', Logo: React },
-  { name: 'NextJS', Logo: NextJs },
-  { name: 'Astro', Logo: AstroSvg },
-  { name: 'TailwindCSS', Logo: Tailwind },
-]
+const techs = await getCollection('technologies', (entry) => {
+  if (import.meta.env.PROD) return entry.data.published
+
+  return true
+})
+
+const sortedTechs = techs.toSorted((a, b) => a.data.order - b.data.order)
 ---
 
 <ul class="flex flex-wrap items-end justify-evenly gap-8">
   {
-    techs.map(({ name, Logo }) => (
-      <li class="p-4">
-        <div class="text-center">
-          <div
-            class="mx-auto mb-4 h-24 w-24 text-rose-400 lg:h-28 lg:w-28"
-            title={`${name} logo`}
-          >
-            <Logo />
-          </div>
+    sortedTechs.map((entry) => {
+      const { data } = entry
+      const { name, iconName } = data
 
-          <div class="text-2xl font-bold tracking-wide">{name}</div>
-        </div>
-      </li>
-    ))
+      return (
+        <li>
+          {/* TODO: make this a link to a technology page */}
+          <div class="flex flex-col items-center gap-8">
+            <Icon
+              class="h-24 w-24 text-rose-400 lg:h-28 lg:w-28"
+              name={iconName}
+              title={`${name} logo`}
+            />
+
+            <div class="text-2xl font-bold tracking-wide">{name}</div>
+          </div>
+        </li>
+      )
+    })
   }
 </ul>

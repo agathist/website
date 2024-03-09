@@ -1,8 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components'
 import { Copyright } from './Copyright'
-import Github from './icons/Github.astro'
-import LinkedIn from './icons/LinkedIn.astro'
-import Twitter from './icons/Twitter.astro'
 
 const links = [
   { href: '/services', text: 'Services' },
@@ -11,11 +9,19 @@ const links = [
 ]
 
 const socialMedia = [
-  { href: 'https://github.com/agathist', Icon: Github, title: 'Github' },
-  { href: 'https://twitter.com/agathist_', Icon: Twitter, title: 'Twitter' },
+  {
+    href: 'https://github.com/agathist',
+    iconName: 'github-logo',
+    title: 'Github',
+  },
+  {
+    href: 'https://twitter.com/agathist_',
+    iconName: 'twitter-logo',
+    title: 'Twitter',
+  },
   {
     href: 'https://linkedin.com/company/agathist',
-    Icon: LinkedIn,
+    iconName: 'linkedin-logo',
     title: 'LinkedIn',
   },
 ]
@@ -27,15 +33,13 @@ const socialMedia = [
   <div class="flex flex-col items-center gap-8 sm:items-end sm:gap-6">
     <div class="flex items-center gap-8">
       {
-        socialMedia.map(({ href, Icon, title }) => (
-          <a
-            class="transition-color block h-8 w-8 text-rose-400 hover:text-pink-500"
-            href={href}
-            title={title}
-            target="_blank"
-          >
+        socialMedia.map(({ href, iconName, title }) => (
+          <a class="block" href={href} title={title} target="_blank">
             <span class="sr-only">{href}</span>
-            <Icon />
+            <Icon
+              class="h-8 w-8 text-rose-400 transition-colors hover:text-pink-500"
+              name={iconName}
+            />
           </a>
         ))
       }
