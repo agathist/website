@@ -37,7 +37,7 @@ const technologiesCollection = defineCollection({
   schema: z.object({
     name: z.string(),
     /**
-     * Should match an id of an icon in our icon sprite svg
+     * Should match a filename in ./src/icons without the extension
      */
     iconName: z.string(),
     order: z.number().default(Infinity),
