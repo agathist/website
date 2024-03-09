@@ -2,12 +2,7 @@
 import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 
-const techs = await getCollection('technologies', (entry) => {
-  if (import.meta.env.PROD) return entry.data.published
-
-  return true
-})
-
+const techs = await getCollection('technologies')
 const sortedTechs = techs.toSorted((a, b) => a.data.order - b.data.order)
 ---
 
