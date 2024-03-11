@@ -2,7 +2,10 @@
 import { getCollection } from 'astro:content'
 import Link from './Link.astro'
 
-const servicesEntries = await getCollection('services')
+const servicesEntries = await getCollection(
+  'services',
+  (entry) => entry.data.published
+)
 const services = [
   ...servicesEntries
     .toSorted((a, b) => a.data.order - b.data.order)

@@ -2,7 +2,7 @@
 import Banner from '../components/Banner.astro'
 import { ContactUsForm } from '../components/ContactUsForm.tsx'
 import Container from '../components/Container.astro'
-import Elaboration from '../components/Elaboration.astro'
+import Services from '../components/Services.astro'
 import Link from '../components/Link.astro'
 import TechExpertise from '../components/TechExpertise.astro'
 import Layout from '../layouts/Layout.astro'
@@ -25,7 +25,7 @@ import Layout from '../layouts/Layout.astro'
             <div
               class="grow basis-1/2 py-16 text-center text-3xl font-light leading-tight lg:py-32 lg:text-left lg:text-4xl lg:drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]"
             >
-              <div class="flex flex-col gap-8 lg:gap-4">
+              <div class="flex flex-col gap-4">
                 <p>We are ready to build your next great&nbsp;application</p>
                 <p>Or improve one of your existing&nbsp;ones</p>
               </div>
@@ -33,7 +33,7 @@ import Layout from '../layouts/Layout.astro'
 
             <!--
               This is the simplest way I could find to achieve the responsive
-              layout for Elaboration I wanted
+              layout for Services I wanted
 
               Render it twice, hide it when necessary
             -->
@@ -42,7 +42,7 @@ import Layout from '../layouts/Layout.astro'
                 class="absolute -bottom-1/4 -top-1/4 w-full rounded bg-slate-800 p-8 shadow-lg"
               >
                 <div class="flex h-full flex-col justify-center">
-                  <Elaboration />
+                  <Services />
                 </div>
               </div>
             </div>
@@ -52,14 +52,14 @@ import Layout from '../layouts/Layout.astro'
 
       <!--
         This is the simplest way I could find to achieve the responsive
-        layout for Elaboration I wanted
+        layout for Services I wanted
 
         Render it twice, hide it when necessary
       -->
       <div class="bg-gradient-to-b from-slate-800 to-slate-900 lg:hidden">
         <Container>
           <div class="py-16 text-xl">
-            <Elaboration />
+            <Services />
           </div>
         </Container>
       </div>
@@ -79,7 +79,7 @@ import Layout from '../layouts/Layout.astro'
             </p>
           </div>
 
-          <div class="lg:mt-12">
+          <div class="lg:mt-20">
             <TechExpertise />
           </div>
         </div>
