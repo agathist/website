@@ -34,7 +34,13 @@ const socialMedia = [
     <div class="flex items-center gap-8">
       {
         socialMedia.map(({ href, iconName, title }) => (
-          <a class="block" href={href} title={title} target="_blank">
+          <a
+            class="block"
+            href={href}
+            title={title}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <span class="sr-only">{href}</span>
             <Icon
               class="h-8 w-8 text-rose-400 transition-colors hover:text-pink-500"

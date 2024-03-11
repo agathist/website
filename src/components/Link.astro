@@ -5,10 +5,18 @@ interface Props {
    * Default is false, which sets the Link as an inline-block element
    */
   block?: boolean
+  external?: boolean
   href: string
 }
 
-const { block = false, href } = Astro.props
+const { block = false, external = false, href } = Astro.props
+
+const additionalProps: Partial<Pick<HTMLAnchorElement, 'rel' | 'target'>> = {}
+
+if (external) {
+  additionalProps.rel = 'noopener noreferrer'
+  additionalProps.target = '_blank'
+}
 ---
 
 <a
@@ -16,6 +24,7 @@ const { block = false, href } = Astro.props
     block ? 'block' : 'inline-block'
   } border-b-4 border-b-pink-500 hover:bg-pink-500`}
   href={href}
+  {...additionalProps}
 >
   <slot />
 </a>
