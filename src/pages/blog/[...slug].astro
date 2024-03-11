@@ -98,14 +98,14 @@ const formattedDate = formatPostDate(date)
               </div>
 
               <div class="text-gray-200">{author.data.role}</div>
+
               {
                 author.data.email && (
-                  <a
-                    class="underline transition-colors hover:text-pink-500"
-                    href={`mailto:${author.data.email}`}
-                  >
-                    {author.data.email}
-                  </a>
+                  <div class="flex">
+                    <Link href={`mailto:${author.data.email}`}>
+                      {author.data.email}
+                    </Link>
+                  </div>
                 )
               }
             </div>

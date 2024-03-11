@@ -29,6 +29,13 @@ const teamCollection = defineCollection({
     imgUrl: z.string().optional(),
     order: z.number().default(Infinity),
     published: z.boolean().default(false),
+    /**
+     * Social media links. My thought is a person might use them to vette us.
+     * They are optional, so you can choose to share what you want
+     */
+    github: z.string().optional(),
+    twitter: z.string().optional(),
+    linkedin: z.string().optional(),
   }),
 })
 
