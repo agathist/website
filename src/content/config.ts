@@ -1,6 +1,15 @@
 import { defineCollection, reference } from 'astro:content'
 import { z } from 'astro/zod'
 
+const openSourceProjectsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    date: z.string().datetime(),
+    description: z.string(),
+    title: z.string(),
+  }),
+})
+
 const postsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -53,6 +62,7 @@ const technologiesCollection = defineCollection({
 })
 
 export const collections = {
+  openSourceProjects: openSourceProjectsCollection,
   posts: postsCollection,
   services: servicesCollection,
   team: teamCollection,

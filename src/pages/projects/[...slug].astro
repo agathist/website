@@ -1,0 +1,64 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { byEntryDate, formatPostDate } from '../../utils'
+import Layout from '../../layouts/Layout.astro'
+import PageStandard from '../../layouts/PageStandard.astro'
+import Container from '../../components/Container.astro'
+import GradientText from '../../components/GradientText.astro'
+import Link from '../../components/Link.astro'
+import PostH3 from '../../components/PostH3.astro'
+import PostH4 from '../../components/PostH4.astro'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const openSourceProjectEntries = await getCollection('openSourceProjects')
+  const openSourceProjectsSorted =
+    openSourceProjectEntries.toSorted(byEntryDate)
+
+  return openSourceProjectsSorted.map((entry) => {
+    return {
+      params: { slug: entry.slug },
+      props: {
+        entry,
+      },
+    }
+  })
+}
+
+interface Props {
+  entry: CollectionEntry<'openSourceProjects'>
+}
+
+const props = Astro.props
+const { entry } = props
+const { date, description, title } = entry.data
+const { Content } = await entry.render()
+
+const formattedDate = formatPostDate(date)
+---
+
+<Layout description={description} title={`${title} | Blog | Agathist`}>
+  <PageStandard>
+    <Container>
+      <article class="flex flex-col gap-8">
+        <div class="lg:w-3/4">
+          <GradientText>
+            <h2 class="text-6xl font-bold leading-tight">
+              {title}
+            </h2>
+          </GradientText>
+
+          <div class="italic text-gray-200">
+            {formattedDate}
+          </div>
+        </div>
+
+        <div
+          class="post leading-chill lg:leading-chill flex max-w-prose flex-col gap-8 lg:text-xl"
+        >
+          <Content components={{ a: Link, h3: PostH3, h4: PostH4 }} />
+        </div>
+      </article>
+    </Container>
+  </PageStandard>
+</Layout>
