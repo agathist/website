@@ -1,16 +1,10 @@
 ---
 interface Props {
-  /**
-   * Turns the link into a block level element
-   * Default is false, which sets the Link as an inline-block element
-   */
-  block?: boolean
-  external?: boolean
   href: string
 }
 
-const { block = false, external = false, href } = Astro.props
-
+const { href } = Astro.props
+const external = href.startsWith('http')
 const additionalProps: Partial<Pick<HTMLAnchorElement, 'rel' | 'target'>> = {}
 
 if (external) {
@@ -20,11 +14,7 @@ if (external) {
 ---
 
 <a
-  class={`${
-    block ? 'block' : 'inline-block'
-  } border-b-4 border-b-pink-500 hover:bg-pink-500`}
+  class={`border-b-2 border-b-pink-500 hover:bg-pink-500`}
   href={href}
-  {...additionalProps}
+  {...additionalProps}><slot /></a
 >
-  <slot />
-</a>
