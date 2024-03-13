@@ -1,0 +1,73 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import PageStandard from '../../layouts/PageStandard.astro'
+import Container from '../../components/Container.astro'
+import PageHeading from '../../components/PageHeading.astro'
+import { formatPostDate } from '../../utils'
+
+type ProjectType = 'client' | 'oss'
+type Project = CollectionEntry<'openSourceProjects'> & { type: ProjectType }
+
+const ossEntries = await getCollection('openSourceProjects')
+const ossProjects: Project[] = ossEntries.map((entry) => ({
+  ...entry,
+  type: 'oss',
+}))
+
+// TODO: one day this will combine OSS and Client projects
+const projects: Project[] = [...ossProjects]
+
+const LABELS: Record<ProjectType, string> = {
+  client: 'Client',
+  oss: 'Open Source',
+}
+---
+
+<Layout title="Blog | Agathist">
+  <PageStandard>
+    <Container>
+      <div class="flex flex-col gap-8">
+        <PageHeading>Projects</PageHeading>
+
+        <p class="max-w-prose text-2xl">
+          Check out our most recent client and open source projects.
+        </p>
+
+        <div class="flex flex-col gap-4">
+          {
+            projects.length ? (
+              projects.map((entry) => (
+                <a
+                  class="-ml-8 block rounded p-8 transition-colors hover:bg-white/10 lg:w-3/4"
+                  href={`/projects/${entry.slug}`}
+                >
+                  <div class="flex flex-col gap-4">
+                    <div class="text-sm text-gray-300">
+                      {formatPostDate(entry.data.date)}
+                    </div>
+
+                    <div class="text-3xl font-bold text-pink-500">
+                      {entry.data.title}
+                    </div>
+
+                    <div class="text-2xl text-gray-200">
+                      {entry.data.description}
+                    </div>
+
+                    <div class="flex gap-2">
+                      <div class="text-gray-200">Project type:</div>
+                      <div class="text-pink-500">{LABELS[entry.type]}</div>
+                    </div>
+                  </div>
+                </a>
+              ))
+            ) : (
+              <div>No projects yet!</div>
+            )
+          }
+        </div>
+      </div>
+    </Container>
+  </PageStandard>
+</Layout>

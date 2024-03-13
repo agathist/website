@@ -21,6 +21,9 @@ export default {
           },
         },
       },
+      lineHeight: {
+        chill: 1.8,
+      },
     },
   },
   plugins: [],
