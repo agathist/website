@@ -1,10 +1,13 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { Copyright } from './Copyright'
+import Link from './Link.astro'
 
 const links = [
   { href: '/services', text: 'Services' },
   { href: '/about', text: 'About' },
+  { href: '/blog', text: 'Blog' },
+  { href: '/projects', text: 'Projects' },
   { href: '/contact', text: 'Contact Us' },
 ]
 
@@ -27,6 +30,10 @@ const socialMedia = [
 ]
 ---
 
+<!--
+  We switch to flex-row-reverse so that copyright goes left and nav goes right
+  as the viewport gets larger
+-->
 <footer
   class="flex flex-col items-center gap-8 p-8 sm:flex-row-reverse sm:items-end sm:justify-between sm:gap-4"
 >
@@ -51,16 +58,8 @@ const socialMedia = [
       }
     </div>
 
-    <nav>
-      <ul class="flex gap-6">
-        {
-          links.map((link) => (
-            <a class="text-gray-300 hover:text-white" href={link.href}>
-              {link.text}
-            </a>
-          ))
-        }
-      </ul>
+    <nav class="flex flex-wrap justify-evenly gap-6">
+      {links.map((link) => <Link href={link.href}>{link.text}</Link>)}
     </nav>
   </div>
 
