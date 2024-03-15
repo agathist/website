@@ -26,9 +26,10 @@ const links = [
 })
 ---
 
-<div class="relative">
+<div class="relative" id="nav-container">
   <nav
     class="absolute right-0 top-full mt-4 hidden bg-slate-800 p-6 lg:static lg:mt-0 lg:block lg:bg-transparent lg:p-0 lg:py-3"
+    id="main-nav"
   >
     <ul class="items-right flex flex-col gap-6 lg:flex-row lg:items-baseline">
       {
@@ -71,7 +72,27 @@ const links = [
 </div>
 
 <script>
-  document.getElementById('nav-toggle')?.addEventListener('click', () => {
-    document.querySelector('nav')?.classList.toggle('hidden')
+  const navContainer = document.getElementById('nav-container')
+  const mainNav = document.getElementById('main-nav')
+  const navToggle = document.getElementById('nav-toggle')
+
+  /**
+   * Toggle the visibility of the main nav
+   */
+  navToggle?.addEventListener('click', () => {
+    mainNav?.classList.toggle('hidden')
+  })
+
+  /**
+   * If a click occurs outside the navContainer, close it
+   */
+  document.addEventListener('click', (e) => {
+    if (e.target === null) return
+
+    const wasClickedInsideNav = navContainer?.contains(e.target as Node)
+
+    if (!wasClickedInsideNav) {
+      mainNav?.classList.add('hidden')
+    }
   })
 </script>
