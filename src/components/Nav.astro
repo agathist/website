@@ -1,29 +1,15 @@
 ---
+import { TOP_LEVEL_NAV_ITEMS } from '../constants'
+
 const { pathname } = new URL(Astro.request.url)
 
-const links = [
-  {
-    href: '/services',
-    text: 'Services',
-  },
-  {
-    href: '/about',
-    text: 'About',
-  },
-  {
-    href: '/blog',
-    text: 'Blog',
-  },
-  {
-    href: '/projects',
-    text: 'Projects',
-  },
-].map((link) => {
-  return {
+const links = TOP_LEVEL_NAV_ITEMS
+  // Contact page is handled separately, so filter it out
+  .filter((item) => item.href !== '/contact')
+  .map((link) => ({
     ...link,
     isCurrentPage: pathname.startsWith(link.href),
-  }
-})
+  }))
 ---
 
 <div class="relative" id="nav-container">

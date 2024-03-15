@@ -2,14 +2,7 @@
 import { Icon } from 'astro-icon/components'
 import { Copyright } from './Copyright'
 import Link from './Link.astro'
-
-const links = [
-  { href: '/services', text: 'Services' },
-  { href: '/about', text: 'About' },
-  { href: '/blog', text: 'Blog' },
-  { href: '/projects', text: 'Projects' },
-  { href: '/contact', text: 'Contact Us' },
-]
+import { TOP_LEVEL_NAV_ITEMS } from '../constants'
 
 const socialMedia = [
   {
@@ -59,7 +52,11 @@ const socialMedia = [
     </div>
 
     <nav class="flex flex-wrap justify-evenly gap-6">
-      {links.map((link) => <Link href={link.href}>{link.text}</Link>)}
+      {
+        TOP_LEVEL_NAV_ITEMS.map((link) => (
+          <Link href={link.href}>{link.text}</Link>
+        ))
+      }
     </nav>
   </div>
 
