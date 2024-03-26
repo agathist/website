@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { Copyright } from './Copyright'
 import Link from './Link.astro'
 import { TOP_LEVEL_NAV_ITEMS } from '../constants'
 
@@ -60,5 +59,14 @@ const socialMedia = [
     </nav>
   </div>
 
-  <p><Copyright client:load /> Agathist</p>
+  <p>&copy;<span id="copyright-year"></span> Agathist. All Rights Reserved.</p>
 </footer>
+
+<script>
+  const year = new Date().getFullYear()
+  const copyrightEl = document.getElementById('copyright-year')
+
+  if (copyrightEl) {
+    copyrightEl.innerText = String(year)
+  }
+</script>
