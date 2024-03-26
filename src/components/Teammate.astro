@@ -79,16 +79,20 @@ const SOCIALS = [
 
     {
       skills.length > 0 && (
-        <div class="mt-8 flex gap-4">
-          <div class="text-lg font-bold">Skills:</div>
+        <div class="mt-8">
+          <Prose>
+            <div class="flex gap-4">
+              <div class="text-lg font-bold">Skills:</div>
 
-          <div class="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <div class="rounded-full bg-white/90 px-3 py-1 text-sm text-rose-900">
-                {skill.toLowerCase()}
+              <div class="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <div class="rounded-full bg-white/90 px-3 py-1 text-sm text-rose-900">
+                    {skill.toLowerCase()}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          </Prose>
         </div>
       )
     }
