@@ -36,7 +36,7 @@ const teamCollection = defineCollection({
     role: z.string(),
     email: z.string().optional(),
     imgUrl: z.string().optional(),
-    skills: z.array(z.string()).optional().default([]),
+    skills: z.array(z.string()),
     order: z.number().default(Infinity),
     published: z.boolean().default(false),
     /**
