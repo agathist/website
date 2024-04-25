@@ -6,6 +6,16 @@ import Services from '../components/Services.astro'
 import Link from '../components/Link.astro'
 import TechExpertise from '../components/TechExpertise.astro'
 import Layout from '../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const clientsEntries = await getCollection('clients')
+const clients = clientsEntries
+  .map((entry) => entry.data)
+  .toSorted(
+    (a, b) =>
+      (new Date(b.partnershipDate) as unknown as number) -
+      (new Date(a.partnershipDate) as unknown as number)
+  )
 ---
 
 <Layout
@@ -92,24 +102,34 @@ import Layout from '../layouts/Layout.astro'
       <div class="flex flex-col gap-16 py-32">
         <h3 class="text-center font-serif text-3xl lg:text-5xl">Our Clients</h3>
 
-        <div class="flex flex-col gap-8 text-center">
-          <div class="flex flex-col gap-4 text-xl font-light lg:text-2xl">
-            <p class="leading-relaxed">
-              No one yet, but you have to start somewhere! <strong
-                >Want to be the&nbsp;first?</strong
-              >
-            </p>
-
-            <p class="leading-relaxed">
-              Your logo and testimonial could one day be&nbsp;here.
-            </p>
-          </div>
+        <div class="flex justify-center">
+          <p
+            class="max-w-prose text-center text-xl leading-relaxed lg:text-2xl lg:leading-relaxed"
+          >
+            We're finding our first clients and delivering value to them as
+            quickly as possible. You could be our next great client.
+          </p>
         </div>
 
         <div class="flex flex-wrap justify-center gap-8 lg:gap-12">
           {
-            ['Your', 'Logo', 'Here!'].map((text) => (
-              <div class="flex h-32 w-32 items-center justify-center rounded-xl border-4 border-dashed border-gray-300/90 text-3xl text-gray-300/90 lg:h-48 lg:w-48 lg:text-4xl">
+            clients.map((client) => {
+              return (
+                <a
+                  class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 p-4 text-3xl transition-colors hover:bg-white/25 lg:h-48 lg:w-48 lg:text-4xl"
+                  href={client.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={client.logoUrl} alt={`${client.name} logo`} />
+                  <span class="sr-only">{client.name}</span>
+                </a>
+              )
+            })
+          }
+          {
+            ['Your', 'Logo', 'Could', 'Be', 'Next!'].map((text) => (
+              <div class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 text-2xl font-bold uppercase text-black mix-blend-screen lg:h-48 lg:w-48 lg:text-3xl">
                 {text}
               </div>
             ))
