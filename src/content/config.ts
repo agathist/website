@@ -1,6 +1,21 @@
 import { defineCollection, reference } from 'astro:content'
 import { z } from 'astro/zod'
 
+/**
+ * This collection will strictly be about our client data. We'll create another
+ * collection to manage testimonials and case studies.
+ */
+const clientsCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    logoUrl: z.string(),
+    name: z.string(),
+    partnershipDate: z.string().datetime(),
+    published: z.boolean().default(false),
+    website: z.string(),
+  }),
+})
+
 const openSourceProjectsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -63,6 +78,7 @@ const technologiesCollection = defineCollection({
 })
 
 export const collections = {
+  clients: clientsCollection,
   openSourceProjects: openSourceProjectsCollection,
   posts: postsCollection,
   services: servicesCollection,
