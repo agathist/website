@@ -8,7 +8,10 @@ import TechExpertise from '../components/TechExpertise.astro'
 import Layout from '../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 
-const clientsEntries = await getCollection('clients')
+const clientsEntries = await getCollection(
+  'clients',
+  (entry) => entry.data.published
+)
 const clients = clientsEntries
   .map((entry) => entry.data)
   .toSorted(
@@ -103,12 +106,17 @@ const clients = clientsEntries
         <h3 class="text-center font-serif text-3xl lg:text-5xl">Our Clients</h3>
 
         <div class="flex justify-center">
-          <p
-            class="max-w-prose text-center text-xl leading-relaxed lg:text-2xl lg:leading-relaxed"
+          <div
+            class="flex max-w-prose flex-col gap-4 text-center text-xl leading-relaxed lg:text-2xl lg:leading-relaxed"
           >
-            We're finding our first clients and delivering value to them as
-            quickly as possible. You could be our next great client.
-          </p>
+            <p>
+              We're finding our first clients and delivering value to them as
+              right away.
+            </p>
+            <p>
+              <strong>You</strong> could be our next great client.
+            </p>
+          </div>
         </div>
 
         <div class="flex flex-wrap justify-center gap-8 lg:gap-12">
@@ -116,8 +124,9 @@ const clients = clientsEntries
             clients.map((client) => {
               return (
                 <a
-                  class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 p-4 text-3xl transition-colors hover:bg-white/25 lg:h-48 lg:w-48 lg:text-4xl"
+                  class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 p-6 text-3xl transition-colors hover:bg-white/25 lg:h-48 lg:w-48 lg:text-4xl"
                   href={client.website}
+                  title={client.name}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
