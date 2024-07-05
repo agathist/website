@@ -16,15 +16,6 @@ const clientsCollection = defineCollection({
   }),
 })
 
-const openSourceProjectsCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    date: z.string().datetime(),
-    description: z.string(),
-    title: z.string(),
-  }),
-})
-
 const postsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -32,6 +23,18 @@ const postsCollection = defineCollection({
     description: z.string().optional(),
     title: z.string(),
     author: reference('team'),
+  }),
+})
+
+const projectsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    client: reference('clients').optional(),
+    date: z.string().datetime(),
+    description: z.string(),
+    published: z.boolean().default(false),
+    title: z.string(),
+    type: z.enum(['OPEN_SOURCE', 'CLIENT']),
   }),
 })
 
@@ -51,7 +54,6 @@ const teamCollection = defineCollection({
     role: z.string(),
     email: z.string().optional(),
     imgUrl: z.string().optional(),
-    skills: z.array(z.string()),
     order: z.number().default(Infinity),
     published: z.boolean().default(false),
     /**
@@ -79,7 +81,7 @@ const technologiesCollection = defineCollection({
 
 export const collections = {
   clients: clientsCollection,
-  openSourceProjects: openSourceProjectsCollection,
+  projects: projectsCollection,
   posts: postsCollection,
   services: servicesCollection,
   team: teamCollection,
