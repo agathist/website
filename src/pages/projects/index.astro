@@ -1,30 +1,24 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import PageStandard from '../../layouts/PageStandard.astro'
 import Container from '../../components/Container.astro'
 import PageHeading from '../../components/PageHeading.astro'
 import { formatPostDate } from '../../utils'
+import { PROJECT_TYPE_TO_LABEL } from '../../constants'
 
-type ProjectType = 'client' | 'oss'
-type Project = CollectionEntry<'openSourceProjects'> & { type: ProjectType }
+const entries = await getCollection('projects', (entry) => {
+  // If we are in PROD, hide the unpublished technologies
+  if (import.meta.env.PROD) return entry.data.published
 
-const ossEntries = await getCollection('openSourceProjects')
-const ossProjects: Project[] = ossEntries.map((entry) => ({
+  return true
+})
+const projects = entries.map((entry) => ({
   ...entry,
-  type: 'oss',
 }))
-
-// TODO: one day this will combine OSS and Client projects
-const projects: Project[] = [...ossProjects]
-
-const LABELS: Record<ProjectType, string> = {
-  client: 'Client',
-  oss: 'Open Source',
-}
 ---
 
-<Layout title="Blog | Agathist">
+<Layout title="Projects | Agathist">
   <PageStandard>
     <Container>
       <div class="flex flex-col gap-8">
@@ -37,31 +31,46 @@ const LABELS: Record<ProjectType, string> = {
         <div class="flex flex-col gap-4">
           {
             projects.length ? (
-              projects.map((entry) => (
-                <a
-                  class="-ml-8 block rounded p-8 transition-colors hover:bg-white/10 lg:w-3/4"
-                  href={`/projects/${entry.slug}`}
-                >
-                  <div class="flex flex-col gap-4">
-                    <div class="text-sm text-gray-300">
-                      {formatPostDate(entry.data.date)}
-                    </div>
+              projects.map((entry) => {
+                const { data, slug } = entry
+                const { date, description, published, title, type } = data
 
-                    <div class="text-3xl font-bold text-pink-500">
-                      {entry.data.title}
-                    </div>
+                return (
+                  <a
+                    class="-ml-8 block rounded p-8 transition-colors hover:bg-white/10 lg:w-3/4"
+                    href={`/projects/${slug}`}
+                  >
+                    <div class="flex flex-col gap-4">
+                      {!published && (
+                        <div class="flex">
+                          <div class="bg-yellow-500 p-1 text-xs text-black">
+                            Unpublished
+                          </div>
+                        </div>
+                      )}
 
-                    <div class="text-2xl text-gray-200">
-                      {entry.data.description}
-                    </div>
+                      <div class="text-sm text-gray-300">
+                        {formatPostDate(date)}
+                      </div>
 
-                    <div class="flex gap-2">
-                      <div class="text-gray-200">Project type:</div>
-                      <div class="text-pink-500">{LABELS[entry.type]}</div>
+                      <div class="text-3xl font-bold text-pink-500">
+                        {title}
+                      </div>
+
+                      {description && (
+                        <div class="text-xl text-gray-200">{description}</div>
+                      )}
+
+                      <div class="flex gap-2">
+                        <div class="text-gray-200">Project type:</div>
+                        <div class="text-pink-500">
+                          {PROJECT_TYPE_TO_LABEL[type]}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              ))
+                  </a>
+                )
+              })
             ) : (
               <div>No projects yet!</div>
             )

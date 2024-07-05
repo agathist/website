@@ -32,3 +32,7 @@ export function formatPostDate(isoString: string) {
 
   return `${MONTHS[parseInt(month, 10) - 1]} ${day}, ${year}`
 }
+
+export function slugify(str: string) {
+  return str.toLowerCase().split(' ').filter(Boolean).join('-')
+}
