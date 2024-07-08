@@ -19,6 +19,19 @@ const clients = clientsEntries
       (new Date(b.partnershipDate) as unknown as number) -
       (new Date(a.partnershipDate) as unknown as number)
   )
+
+const projectsEntries = await getCollection(
+  'projects',
+  (entry) => entry.data.published
+)
+const projects = projectsEntries
+  .map((entry) => ({ ...entry.data, slug: entry.slug }))
+  .toSorted(
+    (a, b) =>
+      (new Date(b.date) as unknown as number) -
+      (new Date(a.date) as unknown as number)
+  )
+  .filter((_, idx) => idx < 3)
 ---
 
 <Layout
@@ -100,75 +113,119 @@ const clients = clientsEntries
     </section>
   </main>
 
-  <section class="bg-gradient-to-b from-slate-900 to-pink-900">
-    <Container>
-      <div class="flex flex-col gap-16 py-32">
-        <h3 class="text-center font-serif text-3xl lg:text-5xl">Our Clients</h3>
+  <div
+    class="flex flex-col gap-48 bg-gradient-to-b from-slate-900 via-pink-900 to-slate-900"
+  >
+    <section>
+      <Container>
+        <div class="flex flex-col gap-16">
+          <h3 class="text-center font-serif text-3xl lg:text-5xl">
+            Our Clients
+          </h3>
 
-        <div class="flex justify-center">
-          <div
-            class="flex max-w-prose flex-col gap-4 text-center text-xl leading-relaxed lg:text-2xl lg:leading-relaxed"
-          >
-            <p>
-              We're finding our first clients and delivering value to them as
-              right away.
-            </p>
-            <p>
-              <strong>You</strong> could be our next great client.
-            </p>
+          <div class="flex justify-center">
+            <div
+              class="flex max-w-prose flex-col gap-4 text-center text-xl leading-relaxed lg:text-2xl lg:leading-relaxed"
+            >
+              <p>
+                We're finding our first clients and delivering value to them as
+                right away.
+              </p>
+              <p>
+                <strong>You</strong> could be our next great client.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-8 lg:gap-12">
+            {
+              clients.map((client) => {
+                return (
+                  <a
+                    class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 p-6 text-3xl transition-colors hover:bg-white/25 lg:h-48 lg:w-48 lg:text-4xl"
+                    href={client.website}
+                    title={client.name}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={client.logoUrl} alt={`${client.name} logo`} />
+                    <span class="sr-only">{client.name}</span>
+                  </a>
+                )
+              })
+            }
+            {
+              ['Your', 'Logo', 'Could', 'Be', 'Next!'].map((text) => (
+                <div class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 text-2xl font-bold uppercase text-black mix-blend-screen lg:h-48 lg:w-48 lg:text-3xl">
+                  {text}
+                </div>
+              ))
+            }
           </div>
         </div>
+      </Container>
+    </section>
 
-        <div class="flex flex-wrap justify-center gap-8 lg:gap-12">
-          {
-            clients.map((client) => {
-              return (
-                <a
-                  class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 p-6 text-3xl transition-colors hover:bg-white/25 lg:h-48 lg:w-48 lg:text-4xl"
-                  href={client.website}
-                  title={client.name}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={client.logoUrl} alt={`${client.name} logo`} />
-                  <span class="sr-only">{client.name}</span>
-                </a>
-              )
-            })
-          }
-          {
-            ['Your', 'Logo', 'Could', 'Be', 'Next!'].map((text) => (
-              <div class="flex h-32 w-32 items-center justify-center rounded-xl bg-white/20 text-2xl font-bold uppercase text-black mix-blend-screen lg:h-48 lg:w-48 lg:text-3xl">
-                {text}
-              </div>
-            ))
-          }
+    <section>
+      <Container>
+        <div class="flex flex-col gap-16">
+          <h3 class="text-center font-serif text-3xl lg:text-5xl">
+            Recent Projects
+          </h3>
+
+          <div class="flex flex-col gap-8 sm:grid sm:grid-cols-2">
+            {
+              projects.map((project) => {
+                return (
+                  <a
+                    class="rounded-xl bg-slate-900/20 p-12 transition-colors hover:bg-slate-900/30"
+                    href={`/projects/${project.slug}`}
+                  >
+                    <div class="flex flex-col gap-4">
+                      <h4 class="text-xl font-bold text-pink-500 lg:text-2xl">
+                        {project.title}
+                      </h4>
+                      <p class="text-lg text-gray-200 lg:text-xl">
+                        {project.description}
+                      </p>
+
+                      <p>
+                        <span class="border-b-2 border-b-pink-500 text-lg hover:bg-pink-500 lg:text-xl">
+                          Read more
+                        </span>
+                      </p>
+                    </div>
+                  </a>
+                )
+              })
+            }
+          </div>
         </div>
-      </div>
-    </Container>
-  </section>
+      </Container>
+    </section>
 
-  <section class="bg-gradient-to-b from-pink-900 to-slate-900 lg:pt-24">
-    <Container>
-      <div class="flex flex-col gap-12 lg:items-center">
-        <div class="flex flex-col gap-4 lg:text-center">
-          <div class="font-serif text-3xl lg:text-5xl">Contact Us</div>
+    <section>
+      <Container>
+        <div class="flex flex-col gap-12 lg:items-center">
+          <div class="flex flex-col gap-4 lg:text-center">
+            <div class="font-serif text-3xl lg:text-5xl">Contact Us</div>
 
-          <p class="text-xl md:text-2xl">
-            Fill out the form below or send us an email at <Link
-              href="mailto:hello@agath.ist"
-            >
-              hello@agath.ist
-            </Link>
-          </p>
+            <p class="text-xl md:text-2xl">
+              Fill out the form below or send us an email at <Link
+                href="mailto:hello@agath.ist"
+              >
+                hello@agath.ist
+              </Link>
+            </p>
+          </div>
+
+          <div class="w-full lg:w-1/2">
+            <ContactUsForm client:visible />
+          </div>
         </div>
-
-        <div class="w-full lg:w-1/2">
-          <ContactUsForm client:visible />
-        </div>
-      </div>
-    </Container>
-  </section>
+      </Container>
+    </section>
+  </div>
 </Layout>
 
 <style>
