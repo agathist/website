@@ -49,11 +49,17 @@ const projects = projectsEntries
         <Container>
           <div class="lg:flex lg:gap-8">
             <div
-              class="grow basis-1/2 py-16 text-center text-3xl font-light leading-tight lg:py-32 lg:text-left lg:text-4xl lg:drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]"
+              class="grow basis-1/2 py-16 text-center text-2xl font-light leading-tight lg:py-32 lg:text-left lg:text-3xl lg:drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)]"
             >
-              <div class="flex flex-col gap-4">
-                <p>We are ready to build your next great&nbsp;application</p>
-                <p>Or improve one of your existing&nbsp;ones</p>
+              <div class="flex flex-col gap-6">
+                <p>
+                  We're a fully remote software development agency based in the
+                  United States.
+                </p>
+                <p>
+                  We're ready to build your next great application or improve
+                  one of your existing&nbsp;ones.
+                </p>
               </div>
             </div>
 
@@ -169,32 +175,37 @@ const projects = projectsEntries
     <section>
       <Container>
         <div class="flex flex-col gap-16">
-          <h3 class="text-center font-serif text-3xl lg:text-5xl">
-            Recent Projects
-          </h3>
+          <div class="flex flex-col gap-16 text-center">
+            <h3 class="font-serif text-3xl lg:text-5xl">Recent Projects</h3>
+            <p class="text-xl lg:text-2xl">
+              Learn more about some of our most recent client &amp; open
+              source&nbsp;projects.
+            </p>
+          </div>
 
-          <div class="flex flex-col gap-8 sm:grid sm:grid-cols-2">
+          <div class="flex flex-col gap-8 sm:grid sm:grid-cols-3">
             {
               projects.map((project) => {
                 return (
                   <a
-                    class="rounded-xl bg-slate-900/20 p-12 transition-colors hover:bg-slate-900/30"
+                    class="flex flex-col justify-between gap-4 rounded-xl bg-slate-900/20 p-12 transition-colors hover:bg-slate-900/30"
                     href={`/projects/${project.slug}`}
                   >
                     <div class="flex flex-col gap-4">
                       <h4 class="text-xl font-bold text-pink-500 lg:text-2xl">
                         {project.title}
                       </h4>
+
                       <p class="text-lg text-gray-200 lg:text-xl">
                         {project.description}
                       </p>
-
-                      <p>
-                        <span class="border-b-2 border-b-pink-500 text-lg hover:bg-pink-500 lg:text-xl">
-                          Read more
-                        </span>
-                      </p>
                     </div>
+
+                    <p>
+                      <span class="border-b-2 border-b-pink-500 text-lg hover:bg-pink-500 lg:text-xl">
+                        Read more
+                      </span>
+                    </p>
                   </a>
                 )
               })
