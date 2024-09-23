@@ -3,16 +3,14 @@ import { getCollection } from 'astro:content'
 import Container from '../components/Container.astro'
 import PageHeading from '../components/PageHeading.astro'
 import Prose from '../components/Prose.astro'
+import Teammate from '../components/Teammate.astro'
 import Layout from '../layouts/Layout.astro'
 import PageStandard from '../layouts/PageStandard.astro'
-import Teammate from '../components/Teammate.astro'
 
-const teamEntries = await getCollection('team', (entry) => {
-  // If we are in PROD, hide the unpublished teammates
-  if (import.meta.env.PROD) return entry.data.published
-
-  return true
-}).then((entries) => entries.toSorted((a, b) => a.data.order - b.data.order))
+const teamEntries = await getCollection(
+  'team',
+  (entry) => entry.data.published
+).then((entries) => entries.toSorted((a, b) => a.data.order - b.data.order))
 ---
 
 <Layout title="About | Agathist">
