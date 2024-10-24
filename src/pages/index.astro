@@ -1,12 +1,11 @@
 ---
+import { getCollection } from 'astro:content'
 import Banner from '../components/Banner.astro'
 import { ContactUsForm } from '../components/ContactUsForm.tsx'
 import Container from '../components/Container.astro'
 import Services from '../components/Services.astro'
-import Link from '../components/Link.astro'
 import TechExpertise from '../components/TechExpertise.astro'
 import Layout from '../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
 
 const clientsEntries = await getCollection(
   'clients',
@@ -222,11 +221,7 @@ const projects = projectsEntries
             <div class="font-serif text-3xl lg:text-5xl">Contact Us</div>
 
             <p class="text-xl md:text-2xl">
-              Fill out the form below or send us an email at <Link
-                href="mailto:hello@agath.ist"
-              >
-                hello@agath.ist
-              </Link>
+              Fill out the form below and tell us about your project
             </p>
           </div>
 

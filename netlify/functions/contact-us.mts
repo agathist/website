@@ -1,6 +1,6 @@
+import type { Config } from '@netlify/functions'
 import Airtable from 'airtable'
 import nodemailer from 'nodemailer'
-import type { Config } from '@netlify/functions'
 
 export const config: Config = {
   method: 'POST',
@@ -54,8 +54,8 @@ function sendEmail(data: Data) {
   })
 
   return transporter.sendMail({
-    from: 'hello@agath.ist',
-    to: 'hello@agath.ist',
+    from: 'kyle@agath.ist',
+    to: 'kyle@agath.ist',
     subject: 'New Project Submission',
     text: formatEmail(data),
   })
