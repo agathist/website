@@ -6,14 +6,14 @@ const techs = await getCollection('technologies')
 const sortedTechs = techs.toSorted((a, b) => a.data.order - b.data.order)
 ---
 
-<ul class="flex flex-wrap items-end justify-evenly gap-20">
+<ul class="grid grid-cols-2 gap-12 md:grid-cols-3">
   {
     sortedTechs.map((entry) => {
       const { data } = entry
       const { name, iconName } = data
 
       return (
-        <li class="shrink grow basis-1/5">
+        <li>
           <a
             class="group flex flex-col items-center gap-4"
             href={`/technology/${entry.slug}`}
