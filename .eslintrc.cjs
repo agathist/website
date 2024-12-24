@@ -32,6 +32,10 @@ module.exports = {
       files: ['*.tsx'],
       extends: ['plugin:react/recommended', 'plugin:react-hooks/recommended'],
       plugins: ['react'],
+      rules: {
+        'react/jsx-uses-react': 'off',
+        'react/react-in-jsx-scope': 'off',
+      },
       settings: {
         react: {
           version: 'detect',

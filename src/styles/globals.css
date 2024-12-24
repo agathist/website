@@ -31,6 +31,16 @@
   }
 }
 
+@layer utilities {
+  .row {
+    @apply flex flex-row;
+  }
+
+  .stack {
+    @apply flex flex-col;
+  }
+}
+
 code {
   font-family:
     Menlo,

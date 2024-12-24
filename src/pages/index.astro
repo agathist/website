@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
 import Banner from '../components/Banner.astro'
-import { ContactUsForm } from '../components/ContactUsForm.tsx'
 import Container from '../components/Container.astro'
 import Services from '../components/Services.astro'
 import TechExpertise from '../components/TechExpertise.astro'
@@ -209,24 +208,6 @@ const projects = projectsEntries
                 )
               })
             }
-          </div>
-        </div>
-      </Container>
-    </section>
-
-    <section>
-      <Container>
-        <div class="flex flex-col gap-12 lg:items-center">
-          <div class="flex flex-col gap-4 lg:text-center">
-            <div class="font-serif text-3xl lg:text-5xl">Contact Us</div>
-
-            <p class="text-xl md:text-2xl">
-              Fill out the form below and tell us about your project
-            </p>
-          </div>
-
-          <div class="w-full lg:w-1/2">
-            <ContactUsForm client:visible />
           </div>
         </div>
       </Container>

@@ -1,6 +1,5 @@
-import React from 'react'
-
 export type TextareaProps = {
+  disabled?: boolean
   id?: string
   label?: string
   required?: boolean
@@ -8,6 +7,7 @@ export type TextareaProps = {
 }
 
 export function Textarea({
+  disabled = false,
   id,
   label,
   required = false,
@@ -18,7 +18,8 @@ export function Textarea({
       {label && <div className="text-xl">{label}</div>}
 
       <textarea
-        className="w-full rounded p-2 text-black"
+        className="w-full rounded bg-white p-2 text-black disabled:opacity-50"
+        disabled={disabled}
         id={id}
         name={id}
         required={required}
