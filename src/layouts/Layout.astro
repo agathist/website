@@ -1,7 +1,5 @@
 ---
-import ClosingBanner from '../components/ClosingBanner.astro'
 import Footer from '../components/Footer.astro'
-import Header from '../components/Header.astro'
 import '../styles/fonts.css'
 import '../styles/globals.css'
 
@@ -79,16 +77,10 @@ const { author, description = DEFAULT_DESCRIPTION, title } = Astro.props
   </head>
 
   <body class="flex min-h-full flex-col">
-    <ClosingBanner />
-
-    <Header />
-
-    <div class="grow">
+    <div class="flex grow flex-col">
       <slot />
     </div>
 
-    <div class="pt-48">
-      <Footer />
-    </div>
+    <Footer />
   </body>
 </html>
